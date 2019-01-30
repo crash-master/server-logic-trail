@@ -1,0 +1,16 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+.logo-container{
+	width: 500px;
+	margin: auto;
+	margin-top: 50vh;
+	transform: translate(0, -50%);
+}
+
+.logo{
+	width: inherit;
+	height: inherit;
+}

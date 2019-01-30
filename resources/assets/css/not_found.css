@@ -1,0 +1,56 @@
+@font-face{
+	src: url('../fonts/Anton-Regular.ttf');
+	font-family: Anton;
+}
+
+*{
+	padding: 0;
+	margin: 0;
+	outline: none;
+	box-sizing: border-box;
+}
+
+.page-404-container{
+	width: 500px;
+	margin: auto;
+	margin-top: 50vh;
+	transform: translate(0, -50%);
+}
+
+.page-404-img{
+	height: 218px;
+	width: 500px;
+	background: url('../imgs/stl-base.png') no-repeat;
+	-webkit-background-size: 100% auto;
+	background-size: 100% auto;
+}
+
+.about-error{
+	font-family: Anton;
+	letter-spacing: 2px;
+	font-size: 78px;
+	position: relative;
+	top: -23px;
+	width: 500px;
+	text-align: center;
+}
+
+.img-label{
+	font-family: Anton;
+	letter-spacing: 2px;
+	font-size: 40px;
+	position: relative;
+	top: 141px;
+	left: 48px;
+	margin-left: 50%;
+}
+
+@media (max-width: 550px){
+	.page-404-container{
+		transform: translate(-50%, -125%) scale(.6);
+		position: fixed;
+		top: 50%;
+		left: 50%;
+	}
+}
+
