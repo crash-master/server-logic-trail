@@ -7,7 +7,8 @@ use Kernel\{
 	Module,
 	View,
 	Events,
-	ExceptionHandler
+	ExceptionHandler,
+	Components
 };
 
 function ddump($data, $indent=0) {
@@ -112,4 +113,8 @@ function view($layout, $vars = NULL){
 
 function exception($e, $response_code = false){
 	return ExceptionHandler::getInstance() -> handler($e, $response_code);
+}
+
+function component($component_name, $template_path, $array_actions){
+	return Components::create($component_name, [$template_path => $array_actions]);
 }
