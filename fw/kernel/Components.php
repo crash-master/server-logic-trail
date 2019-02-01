@@ -23,6 +23,8 @@ class Components{
 		}
 
 		self::$components[$name] = $component;
+		$component['name'] = $name;
+		Events::register('register_component', $component);
 	}
 
 	/**
@@ -134,10 +136,9 @@ class Components{
 			}
 		}
 
-		Events::register('before_rendered_component', [
-            'view' => $view,
-            'component' => $component
-        ]);
+        Events::register('call_component', [
+			'component' => $component
+		]);
 
 
 		foreach($component as $name => $item){
@@ -150,6 +151,7 @@ class Components{
 				if($controller == ''){
 					dd([$component[$name]]);
 				}
+
 				View::addVars(self::call($controller, $action, $arguments));
 			}
 		}

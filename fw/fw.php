@@ -22,6 +22,8 @@ Router::run(Config::get('system -> showFuncName'));
 if($errHandler -> err_disp)
 	$errHandler -> viewErrs();
 
+Events::register('app_finished');
+
 $end_time = microtime(1);
 
 Log::add('Sys', 'Time of generate page: '.($end_time - $start_time));

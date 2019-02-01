@@ -10,3 +10,4 @@ use Kernel\Router;
 
 Router::_404('IndexController@not_found_page');
 route('/', 'IndexController@welcome_page');
+route('/test', 'TestController@test_page');

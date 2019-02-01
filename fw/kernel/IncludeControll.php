@@ -1,6 +1,7 @@
 <?php
 namespace Kernel;
 use Kernel\Services\RecursiveScan;
+use Kernel\Events;
 
 class IncludeControll{
     public static $dirs;
@@ -12,8 +13,10 @@ class IncludeControll{
     public static function init(){
 		include_once('./fw/kernel/services/RecursiveScan.php');
 		self::loadKernel();
+        self::appRoutesInit();
 		self::appRootInit();
 		self::appAutoLoadInit();
+        Events::register('load_kernel');
 		self::loadModules();
     }
 
@@ -67,25 +70,6 @@ class IncludeControll{
         return true;
     }
 
-    // private static function getClassNamesFromFiles($files){
-    //     $count = count($files);
-    //     $sepword = 'class';
-    //     $names = array();
-    //     for($i=0;$i<$count;$i++){
-    //         $f = file_get_contents($files[$i]);
-    //         $f = explode($sepword,$f);
-    //         $countf = count($f);
-    //         for($k = 1;$k<$countf;$k++){
-    //             $name = explode('{',$f[$k]);
-    //             if(strstr($name[0], 'extends'))
-    //                 $name = explode('extends', $name[0]);
-    //             $names[] = trim($name[0]);
-    //         }
-    //     }
-
-    //     return $names;
-    // }
-
     public static function appAutoLoadInit(){
         if(!is_array(self::$app_files)){
             self::$app_files = [];
@@ -95,6 +79,8 @@ class IncludeControll{
             './app/models',
             './app/controllers',
             './app/migrations',
+            './app/middleware',
+            './app/middleware/kernelevents',
             './app/sets'
         );
 
@@ -128,6 +114,10 @@ class IncludeControll{
 
     private static function appRootInit(){
     	return self::inc(self::scan('./app'));
+    }
+
+    private static function appRoutesInit(){
+        return self::inc(self::scan('./app/routes'));
     }
 
     public static function fileList($arr){

@@ -92,33 +92,12 @@ class Maker{
 
 	public static function getMigrationList(){
 		$list = IncludeControll::scan('./app/migrations/');
-		$packages = PackageControll::getPackageList();
-		$countPackages = count($packages['path']);
-		for($i=0;$i<$countPackages;$i++){
-			$path = $packages['path'][$i].'/migrations/';
-			if(!file_exists($path)){
-				continue;
-			}
-			$list = array_merge($list, IncludeControll::scan($path));
-		}
 		
 		$count = count($list);
 		$res = [];
 		for($i=0;$i<$count;$i++){
 			list($name) = explode('Migration', basename($list[$i]));
 			$res[] = ['name' => $name, 'path' => $list[$i]];
-		}
-
-		$count = count($res);
-		for($i=0;$i<$count;$i++){
-			$package = 'app';
-			for($n=0;$n<$countPackages;$n++){
-				if(strstr($res[$i]['path'], $packages['name'][$n])){
-					$package = $packages['name'][$n];
-					break;
-				}
-			}
-			$res[$i]['package'] = $package;
 		}
 
 		return $res;

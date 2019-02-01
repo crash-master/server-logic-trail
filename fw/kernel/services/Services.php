@@ -68,9 +68,6 @@ function show($data){
 		return false;
 	}
 	echo($data);
-	Events::register('after_rendered_page', [
-        'html' => $data
-    ]);
 	return true;
 }
 
@@ -116,5 +113,8 @@ function exception($e, $response_code = false){
 }
 
 function component($component_name, $template_path, $array_actions){
+	if(is_string($array_actions)){
+		$array_actions = [$array_actions];
+	}
 	return Components::create($component_name, [$template_path => $array_actions]);
 }

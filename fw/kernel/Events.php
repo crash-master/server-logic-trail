@@ -5,7 +5,7 @@ class Events{
     private static $events;
     private static $waste;
     
-    public static function add($eventname, $callback){
+    public static function on($eventname, $callback){
         if(!isset(self::$events[$eventname])){     
             self::$events[$eventname] = [$callback];
             return true;
@@ -15,13 +15,17 @@ class Events{
         return true;
     }
     
-    public static function register($eventname, $args){
+    public static function register($eventname, $args = null){
         self::$waste = !self::$waste ? [$eventname => $args] : array_merge(self::$waste, [$eventname => $args]);
         if(!isset(self::$events[$eventname]))
             return false;
         
         foreach(self::$events[$eventname] as $item => $callback){
-            $callback($args);
+            if(!is_null($args)){
+                $callback($args);
+            }else{
+                $callback();
+            }
         }
         
         return true;

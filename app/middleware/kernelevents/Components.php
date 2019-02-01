@@ -3,11 +3,11 @@ namespace Middleware\Kernelevents;
 use Kernel\Events;
 
 class Components{
-	public function ready_components_map($component_map){
+	public function register_component($component){
 
 	}
 
-	public function call_component($component_name, $path_to_component_template, $component_actions){
+	public function call_component($component){
 
 	}
 
