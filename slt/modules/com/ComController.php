@@ -48,18 +48,9 @@ class ComController{
 		return 'FALSE';
 	}
 	
-	public function createSet($name){
-		if($name){
-			CodeTemplate::create('set', ['setname' => $name, 'tablename' => $name, 'filename' => $name.'Set']);
-			return 'TRUE';
-		}
-
-		return 'FALSE';
-	}
-	
 	public function createModel($name){
 		if($name){
-			CodeTemplate::create('model', ['modelname' => $name, 'setname' => $name, 'filename' => $name]);
+			CodeTemplate::create('model', ['modelname' => $name, 'tablename' => $name, 'filename' => $name]);
 			return 'TRUE';
 		}
 

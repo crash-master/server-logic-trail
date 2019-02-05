@@ -4,10 +4,12 @@
 
 class Test extends \Extend\Model{
 
-    public $sets;
+    public $table = 'Test';
 
-    public function __construct(){
-        $this -> sets = new \Sets\TestSet;
+    public function default_rows(){
+    	return [
+    		'timestamp' => 'NOW()'
+    	];
     }
 
 }

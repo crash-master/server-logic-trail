@@ -79,8 +79,7 @@ class IncludeControll{
             './app/controllers',
             './app/migrations',
             './app/middleware',
-            './app/middleware/kernelevents',
-            './app/sets'
+            './app/middleware/kernelevents'
         );
 
         $rs = new RecursiveScan;

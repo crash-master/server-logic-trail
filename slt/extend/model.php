@@ -18,47 +18,47 @@ class Model{
     		$params['where'] = $params;
     	}
         $where = isset($params['where']) ? $params['where'] : NULL;
-        return (new Essence($this -> sets)) -> get($where, $params);
+        return (new Essence($this)) -> get($where, $params);
     }
 
     public function all($type = "ASC"){
-        return (new Essence($this -> sets)) -> get(NULL, [
+        return (new Essence($this)) -> get(NULL, [
             'order' => ['id', $type]
         ]);
     }
 
     public function first(){
-        return (new Essence($this -> sets)) -> get(NULL, [
+        return (new Essence($this)) -> get(NULL, [
             'order' => ['id', 'ASC'],
             'limit' => [0, 1]
         ]);
     }
 
     public function last(){
-        return (new Essence($this -> sets)) -> get(NULL, [
+        return (new Essence($this)) -> get(NULL, [
             'order' => ['id', 'DESC'],
             'limit' => [0, 1]
         ]);
     }
 
     public function set($data){
-        return (new Essence($this -> sets)) -> set($data);
+        return (new Essence($this)) -> set($data);
     }
 
     public function remove($where = false){
-        return (new Essence($this -> sets)) -> del($this -> whereExistAndConvert($where));
+        return (new Essence($this)) -> del($this -> whereExistAndConvert($where));
     }
 
     public function update($data, $where = false){
-        return (new Essence($this -> sets)) -> edit($data, $this -> whereExistAndConvert($where));
+        return (new Essence($this)) -> edit($data, $this -> whereExistAndConvert($where));
     }
 
     public function length($where = false){
-        return (new Essence($this -> sets)) -> length($this -> whereExistAndConvert($where));
+        return (new Essence($this)) -> length($this -> whereExistAndConvert($where));
     }
 
     public function truncate(){
-        return (new Essence($this -> sets)) -> truncate();
+        return (new Essence($this)) -> truncate();
     }
 
     private function whereExistAndConvert($where){

@@ -4,10 +4,6 @@
 
 class /*$modelname*/ extends \Extend\Model{
 
-    public $sets;
-
-    public function __construct(){
-        $this -> sets = new \Sets\/*$setname*/Set;
-    }
+    public $table = "/*$tablename*/";
 
 }

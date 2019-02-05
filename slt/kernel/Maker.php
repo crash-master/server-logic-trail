@@ -20,8 +20,7 @@ class Maker{
 		@include_once('app/migrations/'.$params[1].'Migration.php');
 		@call_user_func(array($params[1].'Migration','up'));
 		
-		CodeTemplate::create('set', ['tablename' => $params[1], 'setname' => $params[1], 'filename' => $params[1].'Set']);
-		CodeTemplate::create('model', ['modelname' => $params[1], 'setname' => $params[1], 'filename' => $params[1]]);
+		CodeTemplate::create('model', ['modelname' => $params[1], 'tablename' => $params[1], 'filename' => $params[1]]);
 		return true;
 	}
 

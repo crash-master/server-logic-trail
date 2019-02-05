@@ -5,8 +5,12 @@ class TestController{
 		return view("test");
 	}
 
-	public function hello(){
-		return 'HELLO';
+	public function model_test(){
+		return model('Test') -> all();
+	}
+
+	public function new_entry($entry){
+		return model('Test') -> set(['main_row' => $entry]);
 	}
 
 	public function head_component(){
