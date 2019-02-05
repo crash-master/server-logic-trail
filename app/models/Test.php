@@ -4,11 +4,11 @@
 
 class Test extends \Extend\Model{
 
-    public $table = 'Test';
+    public $table = "Test";
 
-    public function default_rows(){
+    public function default_cols(){
     	return [
-    		'timestamp' => 'NOW()'
+    		"username" => "unknown"
     	];
     }
 

@@ -63,7 +63,7 @@ class Connect{
 
 	public static function getTableList(){
 		$sql = 'SHOW TABLES';
-		return self::query($sql);
+		return self::query($sql) -> fetchAll(\PDO::FETCH_ASSOC);
 	}
 }
 
@@ -282,11 +282,9 @@ class DBIO{
 	}
 	
 	public static function columns($tablename){
-//        return self::fq('SHOW COLUMNS FROM `'.$tablename.'`');
 		$q = Connect::$connect -> prepare("DESCRIBE `{$tablename}`");
 		$q -> execute();
 		return $q -> fetchAll(\PDO::FETCH_COLUMN);
-		
 	}
 	
 	public static function getTimeOfCreate($tablename){

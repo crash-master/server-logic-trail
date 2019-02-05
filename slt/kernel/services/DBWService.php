@@ -106,6 +106,12 @@ class DBWService{
         DBW::$createParams[$o->rowname]['datetime'] = array();
         return $o;
     }
+
+    public function timestamp($colname){
+        $o = $this->row($colname);
+        DBW::$createParams[$o->rowname]['timestamp'] = array();
+        return $o;
+    }
     
     // default
     

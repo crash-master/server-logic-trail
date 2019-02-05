@@ -6,8 +6,6 @@ class Essence{
 //    Variables
 	
 	private $rows;
-	// private $rules;
-	// private $errs;
 	private $tableName;
 	private $defaultRows;
 	
@@ -17,13 +15,12 @@ class Essence{
 	
 	public function __construct($model_class){
 		$this -> rows = DBW::getFields($model_class -> table);
-		if(method_exists($model_class, 'default_rows')){
-			$this -> defaultRows = $model_class -> default_rows();
+		if(method_exists($model_class, 'default_cols')){
+			$this -> defaultRows = $model_class -> default_cols();
 		}else{
 			$this -> defaultRows = [];
 		}
-		// $this -> rules = $sets -> rules();
-		// $this -> errs = $sets -> errs();
+
 		$this -> tableName = $model_class -> table;
 		$this -> model_class = $model_class;
 		return false;
@@ -47,30 +44,11 @@ class Essence{
 		if(is_array($res))
 			return $res;
 		
-		// $this -> sets -> ifNotFound();
-		
 		return false;
 	}
 
 
 	public function set($data){
-		// if(is_array($this->rules)){
-		// 	if(is_array($this->errs)){
-		// 		$res = Validator::rules($data,$this->rules,$this->errs);
-		// 	}else{
-		// 		$res = Validator::rules($data,$this->rules);
-		// 	}
-			
-		// 	try{
-		// 		if($res){
-		// 			throw new Exception($this -> tableName . ': ' . $res);
-		// 			return $res;
-		// 		}
-		// 	}catch(Exception $e){
-		// 		exception($e);
-		// 	}
-		// }
-
 
 		$count = count($this -> rows);
 		$result = array();
@@ -92,22 +70,10 @@ class Essence{
 		}
 
 		DBW::i() -> table( $this -> tableName ) -> rows($result) -> run();
-		// $this -> sets -> afterAdding();
 		return false;
 	}
 	
 	public function edit($data, $where = NULL){
-		// if(is_array($this->rules)){
-		// 	if(is_array($this->errs)){
-		// 		$res = Validator::rules($data,$this->rules,$this->errs);
-		// 	}else{
-		// 		$res = Validator::rules($data,$this->rules);
-		// 	}
-			
-		// 	if($res)
-		// 		return $res;
-		// }
-
 		$count = count($this -> rows);
 		$result = array();
 
@@ -127,7 +93,6 @@ class Essence{
 		}
 
 		DBW::u() -> table( $this -> tableName ) -> rows($result) -> where($where) -> run();
-		// $this -> sets -> afterUpdating();
 		return false;
 	}
 
@@ -135,7 +100,6 @@ class Essence{
 
 	public function del($where = false){
 		if(DBW::d() -> table( $this -> tableName ) -> where($where) -> run()){
-			// $this -> sets -> afterRemoving();
 			return true;
 		}
 		
@@ -148,6 +112,10 @@ class Essence{
 	
 	public function truncate(){
 		return DBIO::truncate($this -> tableName);
+	}
+
+	public function get_columns(){
+		return $this -> $rows;
 	}
 
 }

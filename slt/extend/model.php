@@ -42,6 +42,8 @@ class Model{
     }
 
     public function set($data){
+        $data['date_of_create'] = !isset($data['date_of_create']) ? 'NOW()' : $data['date_of_create'];
+        $data['date_of_update'] = !isset($data['date_of_update']) ? 'NOW()' : $data['date_of_update'];
         return (new Essence($this)) -> set($data);
     }
 
@@ -50,6 +52,7 @@ class Model{
     }
 
     public function update($data, $where = false){
+        $data['date_of_update'] = !isset($data['date_of_update']) ? 'NOW()' : $data['date_of_update'];
         return (new Essence($this)) -> edit($data, $this -> whereExistAndConvert($where));
     }
 

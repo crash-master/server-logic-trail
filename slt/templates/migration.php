@@ -8,8 +8,8 @@ class /*$name*/Migration extends \Extend\Migration{
     public static function up(){
         // Create tables in db
         DBW::create('/*$name*/',function($t){
-            $t -> datetime('date_of_update')
-            -> datetime('date_of_create');
+            $t -> timestamp('date_of_update')
+            -> timestamp('date_of_create');
         });
     }
 
