@@ -5,6 +5,10 @@ class TestController{
 		return view("test");
 	}
 
+	public function hello(){
+		return 'HELLO';
+	}
+
 	public function head_component(){
 		return ["title" => "Hello"];
 	}

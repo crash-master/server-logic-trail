@@ -1,6 +1,5 @@
 <?php
 use Kernel\Router;
-use Kernel\DBIO;
 /*
 *   Router::_404(action_name)
 *   Router::get('route', 'action');
@@ -11,7 +10,4 @@ use Kernel\DBIO;
 
 route_not_found('IndexController@not_found_page');
 route('/', 'IndexController@welcome_page');
-route('/test', 'TestController@test_page');
-route('/test2', function(){
-	DBIO::getTableList();
-});
+route('TestController', ['head_component']);

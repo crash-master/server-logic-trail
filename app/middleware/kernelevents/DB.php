@@ -1,6 +1,5 @@
 <?php
 namespace Middleware\Kernelevents;
-use Kernel\Events;
 
 class DB{
 	public function ready_connect_to_db(){

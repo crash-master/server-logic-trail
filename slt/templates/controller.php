@@ -7,6 +7,5 @@ use Kernel\{
 };
 
 class /*$name*/Controller extends \Extend\Controller{
-    
-    
+     
 }

@@ -2,60 +2,66 @@
 
 use Kernel\Events;
 
+use Middleware\Kernelevents\Base;
+use Middleware\Kernelevents\Components;
+use Middleware\Kernelevents\Controllers;
+use Middleware\Kernelevents\DB;
+use Middleware\Kernelevents\Error;
+use Middleware\Kernelevents\Router;
+use Middleware\Kernelevents\View;
+
 function events_map(){
 	on_event('load_kernel', function(){
-		echo "LOAD KERNEL<br>";
+		(new Base()) -> load_kernel();
 	});
 
 	on_event('app_finished', function(){
-		echo("APP FINISHED");
+		(new Base()) -> app_finished();
 	});
 
 	on_event('register_component', function($component){
-		echo $component['name'] . '<br>';
+		(new Components()) -> register_component($component);
 	});
 
 	on_event('call_component', function($component){
-		// dd($component);
+		(new Components()) -> call_component($component);
 	});
 
 	on_event('ready_component_data', function($component_data){
-		// dd($component_data);
+		(new Components()) -> ready_component_data($component_data['component'], $component_data['data']);
 	});
 
 	on_event('call_action', function($action){
-		// dd($action);
+		(new Controllers()) -> call_action($action['controller'], $action['action'], $action['params'], $action['method']);
 	});
 
 	on_event('worked_action', function($action){
-		// dd($action);
+		(new Controllers()) -> worked_action($action['controller'], $action['action'], $action['result']);
 	});
 
 	on_event('route_not_found', function($route){
-		// dd($route);
+		(new Router()) -> route_not_found($route);
 	});
 
 	on_event('ready_template_for_view', function($template_content){
-		// dd($template_content);
+		(new View()) -> ready_template_for_view($template_content);
 	});
 
 	on_event('ready_connect_to_db', function(){
-		echo("<br><strong>DB CONNECT READY</strong><br>");
+		(new DB()) -> ready_connect_to_db();
 	});
 
 	on_event('ready_sql_query_string', function($sql_query_string){
-		echo("<br>{$sql_query_string}<br>");
+		(new DB()) -> ready_sql_query_string($sql_query_string);
 	});
 
 	on_event('response_from_db', function($response_from_db){
-		// echo("<br>{$response_from_db['sql_query_string']}<br>");
-		// dd($response_from_db['response']);
+		(new DB()) -> response_from_db($response_from_db['sql_query_string '], $response_from_db['response']);
 	});
 
 	on_event('error_was_found', function($error){
-		// dd($error);
+		(new Error()) -> error_was_found($error);
 	});
-
 
 }
 

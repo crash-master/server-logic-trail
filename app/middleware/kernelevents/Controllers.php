@@ -1,8 +1,7 @@
 <?php
 namespace Middleware\Kernelevents;
-use Kernel\Events;
 
-class Controller{
+class Controllers{
 	public function call_action($controller_name, $action_name, $params, $method){
 
 	}

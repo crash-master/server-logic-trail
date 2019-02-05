@@ -12,7 +12,7 @@ class /*$setname*/Set extends \Extend\Set{
 
     public function defaultRows(){
         return [
-            'timestamp' => 'NOW()'
+            'date_of_update' => 'NOW()'
         ];
     }
 }

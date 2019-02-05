@@ -144,8 +144,8 @@ class Router{
         }
         
         Events::register('call_action', [
-            'controllerName' => $classname,
-            'actionName' => $methname,
+            'controller' => $classname,
+            'action' => $methname,
             'params' => is_array($params) ? $params : NULL,
             'method' => 'get'
         ]);
@@ -167,7 +167,7 @@ class Router{
         }
         
         Events::register('call_action', [
-            'actionName' => $funcname,
+            'action' => $funcname,
             'params' => count($params) ? $params : NULL,
             'method' => 'get'
         ]);
@@ -187,7 +187,7 @@ class Router{
                     if(is_object($func['action']) or strpos($func['action'],'@') === false){
 
                         Events::register('call_action', [
-                            'actionName' => $func['action'],
+                            'action' => $func['action'],
                             'params' => $data,
                             'method' => 'post'
                         ]);
