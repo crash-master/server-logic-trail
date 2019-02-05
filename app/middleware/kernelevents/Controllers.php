@@ -3,7 +3,7 @@ namespace Middleware\Kernelevents;
 use Kernel\Events;
 
 class Controller{
-	public function call_action($controller_name, $action_name, $params){
+	public function call_action($controller_name, $action_name, $params, $method){
 
 	}
 

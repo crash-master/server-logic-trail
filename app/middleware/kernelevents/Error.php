@@ -3,7 +3,7 @@ namespace Middleware\Kernelevents;
 use Kernel\Events;
 
 class Error{
-	public function error_was_found(){
-
+	public function error_was_found($error){
+		
 	}
 }
