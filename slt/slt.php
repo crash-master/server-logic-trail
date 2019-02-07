@@ -12,6 +12,12 @@ class SLT{
 
 		IncludeControll::init();
 
+		$other_global_slt_vars = [
+			'cache' => Config::get() -> system -> cache,
+			'debug' => Config::get() -> system -> debug
+		];
+		$this -> init_slt_vars($other_global_slt_vars);
+
 		events_map();
 
 		Events::register('load_kernel');
@@ -40,6 +46,9 @@ class SLT{
 	}
 
 	public function init_slt_vars($params){
-		$GLOBALS['SLT_APP_NAME'] = $params['app_name'];
+		foreach($params as $var_name => $value){
+			$var_name = 'SLT_' . strtoupper($var_name);
+			$GLOBALS[$var_name] = $value;
+		}
 	}
 }

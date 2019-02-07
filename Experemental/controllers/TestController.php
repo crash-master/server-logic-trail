@@ -6,8 +6,6 @@ class TestController{
 	}
 
 	public function model_test(){
-		global $SLT_APP_NAME;
-		return $SLT_APP_NAME;
 		return model('Test') -> all();
 	}
 
