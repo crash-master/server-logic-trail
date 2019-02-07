@@ -90,7 +90,6 @@ class ErrorHandler{
 
 		register_shutdown_function([$this, 'fatalErrorHandler']);
 
-		// ob_start();
 	}
 
 	/**

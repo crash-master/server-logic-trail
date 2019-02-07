@@ -11,7 +11,7 @@ return [
             'LogStorageLifeInDays' => 5
         ],
         'migration' => 'on',
-        'debug' => 'on',
-        'cache' => 'off'
+        'debug' => 'off',
+        'cache' => 'on'
     ]
 ];

@@ -9,6 +9,52 @@ class Router{
     private static $post;
     private static $request_args;
     private static $post_flag;
+    public static $cache_flag;
+    public static $init_flag = false;
+    public static $do_cache_flag = false;
+
+    public static function init(){
+        if(self::$init_flag){
+            return false;
+        }
+        self::$init_flag = true;
+        global $SLT_DEBUG, $SLT_CACHE;
+        self::$cache_flag = false;
+        if($SLT_DEBUG == 'off'){
+            if($SLT_CACHE == 'on'){
+                if(Cache::exists('routes.map')){
+                    self::$cache_flag = true;
+                    self::set_data_from_cache();
+                    return true;
+                }else{
+                    self::$do_cache_flag = true;
+                }
+            }
+        }
+
+        self::$do_cache_flag = true;
+
+        return true;
+    }
+
+    public static function set_data_from_cache(){
+        $cache = Cache::get('routes.map');
+        self::$data = $cache['data'];
+        self::$action404 = $cache['action404'];
+        self::$post = $cache['post'];
+        return true;
+    }
+
+    public static function caching(){
+        if(!self::$do_cache_flag){
+            return false;
+        }
+        Cache::set('routes.map', [
+            'data' => self::$data,
+            'action404' => self::$action404,
+            'post' => self::$post
+        ]);
+    }
 
 	public static function addRoute($arr){
 		if(empty($arr['route']) or empty($arr['action'])){
@@ -20,6 +66,7 @@ class Router{
 	}
 
     public static function _404($action){
+        self::init();
         self::$action404 = $action;
         return false;
     }
@@ -220,6 +267,8 @@ class Router{
     }
 
 	public static function run($view = false){
+        self::init();
+        self::caching();
         self::$url = Request::getUrl();
         if(!$view and self::$viewfunc){
             $view = self::$viewfunc;
@@ -249,10 +298,18 @@ class Router{
 	}
 
     public static function get($route, $action){
+        self::init();
+        if(self::$cache_flag){
+            return false;
+        }
         self::addRoute(array('route'=>$route,'action'=>$action));
     }
 
     public static function post($post, $action, $get = false){
+        self::init();
+        if(self::$cache_flag){
+            return false;
+        }
         if(!$post or !$action) return false;
 
         if($get){
@@ -327,6 +384,10 @@ class Router{
     }
     
     public static function actions($c){
+        self::init();
+        if(self::$cache_flag){
+            return false;
+        }
         if(!is_array($c))
             $c = [$c];
         $count = count($c);
@@ -345,6 +406,10 @@ class Router{
     }
     
     public static function controller($classname, $without = false){
+        self::init();
+        if(self::$cache_flag){
+            return false;
+        }
         $without = !$without ? [] : $without;
         $without = !is_array($without) ? [$without] : $without;
         if(!class_exists($classname)){
@@ -382,6 +447,10 @@ class Router{
     }
 
     public static function route_universe($param1, $param2 = false, $param3 = false){
+        self::init();
+        if(self::$cache_flag){
+            return false;
+        }
         if($param1 and !$param2 and !$param3){
             if(!is_array($param1) and strpos($param1, '@') !== false){
                 // this is action

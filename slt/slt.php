@@ -8,15 +8,21 @@ class SLT{
 
 		$this -> init_slt_vars($params);
 
-		include_once('kernel/IncludeControll.php');
+		include_once('slt/kernel/IncludeControll.php');
 
 		IncludeControll::init();
-
+		IncludeControll::appRootInit();
+		IncludeControll::loadKernel();
+		
 		$other_global_slt_vars = [
 			'cache' => Config::get() -> system -> cache,
 			'debug' => Config::get() -> system -> debug
 		];
 		$this -> init_slt_vars($other_global_slt_vars);
+
+        IncludeControll::appRoutesInit();
+		IncludeControll::appAutoLoadInit();
+		IncludeControll::loadModules();
 
 		events_map();
 

@@ -12,11 +12,6 @@ class IncludeControll{
 
     public static function init(){
 		include_once('./slt/kernel/services/RecursiveScan.php');
-        self::appRootInit();
-		self::loadKernel();
-        self::appRoutesInit();
-		self::appAutoLoadInit();
-		self::loadModules();
     }
 
     public function load_one_controller($controller_name){
@@ -113,12 +108,12 @@ class IncludeControll{
         });
     }
 
-    private static function appRootInit(){
+    public static function appRootInit(){
         global $SLT_APP_NAME;
     	return self::inc(self::scan('./'. $SLT_APP_NAME));
     }
 
-    private static function appRoutesInit(){
+    public static function appRoutesInit(){
         global $SLT_APP_NAME;
         return self::inc(self::scan('./' . $SLT_APP_NAME . '/routes'));
     }
