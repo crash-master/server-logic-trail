@@ -20,7 +20,8 @@ class IncludeControll{
     }
 
     public function load_one_controller($controller_name){
-        self::$cache_controllers_list = self::$cache_controllers_list ? self::$cache_controllers_list : (new RecursiveScan) -> get_files('app/controllers');
+        global $SLT_APP_NAME;
+        self::$cache_controllers_list = self::$cache_controllers_list ? self::$cache_controllers_list : (new RecursiveScan) -> get_files($SLT_APP_NAME . '/controllers');
         $controllers = self::$cache_controllers_list;
         foreach($controllers as $controller){
             if(@strpos($controller, $controller_name) !== false){
@@ -70,16 +71,18 @@ class IncludeControll{
     }
 
     public static function appAutoLoadInit(){
+        global $SLT_APP_NAME;
         if(!is_array(self::$app_files)){
             self::$app_files = [];
         }
 
         $dirs = array(
-            './app/models',
-            './app/controllers',
-            './app/migrations',
-            './app/middleware',
-            './app/middleware/kernelevents'
+            './' . $SLT_APP_NAME . '/models',
+            './' . $SLT_APP_NAME . '/controllers',
+            './' . $SLT_APP_NAME . '/controllers/components',
+            './' . $SLT_APP_NAME . '/migrations',
+            './' . $SLT_APP_NAME . '/middleware',
+            './' . $SLT_APP_NAME . '/middleware/kernelevents'
         );
 
         $rs = new RecursiveScan;
@@ -111,11 +114,13 @@ class IncludeControll{
     }
 
     private static function appRootInit(){
-    	return self::inc(self::scan('./app'));
+        global $SLT_APP_NAME;
+    	return self::inc(self::scan('./'. $SLT_APP_NAME));
     }
 
     private static function appRoutesInit(){
-        return self::inc(self::scan('./app/routes'));
+        global $SLT_APP_NAME;
+        return self::inc(self::scan('./' . $SLT_APP_NAME . '/routes'));
     }
 
     public static function fileList($arr){

@@ -1,33 +1,45 @@
 <?php
 namespace Kernel;
-header('Access-Control-Allow-Origin: *');
 
-include_once('kernel/IncludeControll.php');
+class SLT{
 
-IncludeControll::init();
+	public function __construct($params){
+		header('Access-Control-Allow-Origin: *');
 
-events_map();
+		$this -> init_slt_vars($params);
 
-Events::register('load_kernel');
+		include_once('kernel/IncludeControll.php');
 
-$errHandler = new ErrorHandler();
-$exceptionHandler = ExceptionHandler::getInstance() -> init($errHandler);
+		IncludeControll::init();
 
-Module::includesAllModules();
+		events_map();
 
-DBIO::start();
+		Events::register('load_kernel');
 
-Events::register('ready_connect_to_db');
+		$errHandler = new ErrorHandler();
+		$exceptionHandler = ExceptionHandler::getInstance() -> init($errHandler);
 
-components_map();
+		Module::includesAllModules();
 
-Router::run(Config::get('system -> showFuncName'));
+		DBIO::start();
 
-if($errHandler -> err_disp)
-	$errHandler -> viewErrs();
+		Events::register('ready_connect_to_db');
 
-Events::register('app_finished');
+		components_map();
 
-DBIO::end();
+		Router::run(Config::get('system -> showFuncName'));
 
-$errHandler -> logsDump();
+		if($errHandler -> err_disp)
+			$errHandler -> viewErrs();
+
+		Events::register('app_finished');
+
+		DBIO::end();
+
+		$errHandler -> logsDump();
+	}
+
+	public function init_slt_vars($params){
+		$GLOBALS['SLT_APP_NAME'] = $params['app_name'];
+	}
+}
