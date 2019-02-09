@@ -8,8 +8,4 @@ class IndexController{
 	public function not_found_page(){
 		return view('not_found');
 	}
-
-	public function cache_test(){
-		return "HELLO";
-	}
 }

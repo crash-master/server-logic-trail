@@ -7,7 +7,8 @@ use Kernel\{
 	View,
 	Events,
 	ExceptionHandler,
-	Components
+	Components,
+	Cache
 };
 
 function ddump($data, $indent=0) {
@@ -124,4 +125,8 @@ function on_event($event_name, $callback_func){
 
 function route_not_found($controller){
 	return Router::_404($controller);
+}
+
+function cache_code($alias, $code_in_func){
+	return Cache::code($alias, $code_in_func);
 }

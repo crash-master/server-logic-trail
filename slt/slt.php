@@ -13,6 +13,8 @@ class SLT{
 		IncludeControll::init();
 		IncludeControll::appRootInit();
 		IncludeControll::loadKernel();
+
+		Cache::autoclear_not_relevant_cache();
 		
 		$other_global_slt_vars = [
 			'cache' => Config::get() -> system -> cache,

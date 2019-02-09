@@ -91,7 +91,7 @@ class Router{
 
     private static function compareAll(){
         $count = count(self::$data);
-        $routes = @array_keys(self::$data);
+        $routes = array_keys(self::$data);
         for($i=0;$i<$count;$i++){
             if(self::compareUrl(self::$url, $routes[$i])){
                 self::$url = $routes[$i];

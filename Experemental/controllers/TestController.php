@@ -6,7 +6,16 @@ class TestController{
 	}
 
 	public function model_test(){
-		return model('Test') -> all();
+		$id = 2;
+		return cache_code('model.test', function() use ($id){
+			return model('Test') -> get(['id', '=', $id]);
+		});
+	}
+
+	public function all_entries(){
+		return cache_code('all.entries', function(){
+			return model('Test') -> all();
+		});
 	}
 
 	public function new_entry($entry){
