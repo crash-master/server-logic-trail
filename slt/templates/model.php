@@ -1,6 +1,6 @@
 <?php
 
-/* PATH: app/models/ */
+/* PATH: /models/ */
 
 class /*$modelname*/ extends \Extend\Model{
 

@@ -6,7 +6,6 @@ route('/com/about', 'Modules\\ComController@about');
 // api
 route('/com/create/controller/{name}', 'Modules\\ComController@createController');
 route('/com/create/model/{name}', 'Modules\\ComController@createModel');
-route('/com/create/set/{name}', 'Modules\\ComController@createSet');
 route('/com/create/migration/{name}', 'Modules\\ComController@createMigration');
 route('/com/migrations/up/{name}', 'Modules\\ComController@migrationUp');
 route('/com/migrations/down/{name}', 'Modules\\ComController@migrationDown');

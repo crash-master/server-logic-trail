@@ -1,6 +1,6 @@
 <?php
 
-/* PATH: app/controllers/ */
+/* PATH: /controllers/ */
 use Kernel\{
 	View,
 	Model

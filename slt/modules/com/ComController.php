@@ -12,8 +12,7 @@ use Kernel\{
 	Components,
 	CodeTemplate,
 	Config,
-	Maker,
-	PackageControll
+	Maker
 };
 
 class ComController{
@@ -102,8 +101,9 @@ class ComController{
 	}
 	
 	public function migrationDown($name){
+		global $SLT_APP_NAME;
 		if(Config::get('system -> migration') == 'on'){
-			if(!file_exists('app/migrations/'.$name.'Migration.php')){
+			if(!file_exists($SLT_APP_NAME . '/migrations/'.$name.'Migration.php')){
 				return 'FALSE';
 			}
 			
@@ -119,7 +119,8 @@ class ComController{
 	}
 	
 	public function migrationUp($name){
-		if(!file_exists('app/migrations/'.$name.'Migration.php')){
+		global $SLT_APP_NAME;
+		if(!file_exists($SLT_APP_NAME . '/migrations/'.$name.'Migration.php')){
 			return 'FALSE';
 		}
 

@@ -5,6 +5,7 @@ class Maker{
 	public static $params;
 
 	public static function setMigration($params = NULL){
+		global $SLT_APP_NAME;
 		try{
 			if(Config::get('system -> migration') != "on"){
 				throw new Exception('Migration set to off in slt/config/main.config.php');
@@ -17,7 +18,7 @@ class Maker{
 		if(is_null($params)){
 			$params = self::$params;
 		}
-		@include_once('app/migrations/'.$params[1].'Migration.php');
+		@include_once($SLT_APP_NAME . '/migrations/'.$params[1].'Migration.php');
 		@call_user_func(array($params[1].'Migration','up'));
 		
 		CodeTemplate::create('model', ['modelname' => $params[1], 'tablename' => $params[1], 'filename' => $params[1]]);
@@ -87,7 +88,8 @@ class Maker{
 	}
 
 	public static function getMigrationList(){
-		$list = IncludeControll::scan('./app/migrations/');
+		global $SLT_APP_NAME;
+		$list = IncludeControll::scan('./' . $SLT_APP_NAME . '/migrations/');
 		
 		$count = count($list);
 		$res = [];

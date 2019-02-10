@@ -21,7 +21,6 @@ class CodeTemplate{
         if(file_exists($resPath)){
             return true;
         }
-
         $file = self::replaceVars($file, $params);
         $file = self::removePathFromFile($file, $path, $template);
         try{
@@ -37,9 +36,10 @@ class CodeTemplate{
     }
     
     public static function extractPath($file){
+        global $SLT_APP_NAME;
         $path = explode('PATH:', $file);
         $path = explode('*/', $path[1]);
-        return trim($path[0]);
+        return $SLT_APP_NAME . trim($path[0]);
     }
     
     public static function replaceVars($file, $params){

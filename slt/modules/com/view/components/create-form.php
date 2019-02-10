@@ -11,8 +11,5 @@
 		<br>
 		<label for="">Migration</label>
 		<input type="text" data-request="/com/create/migration/{name}" placeholder="Input migration name">
-		<br>
-		<label for="">Set</label>
-		<input type="text" data-request="/com/create/set/{name}" placeholder="Input set name">
 	</li>
 </ul>

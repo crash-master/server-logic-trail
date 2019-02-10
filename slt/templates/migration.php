@@ -1,6 +1,6 @@
 <?php
 
-/* PATH: app/migrations/ */
+/* PATH: /migrations/ */
 use Kernel\DBW;
 
 class /*$name*/Migration extends \Extend\Migration{
