@@ -1,0 +1,12 @@
+[2019-02-11 21:22:51] E_WARNING (code 2) | Invalid argument supplied for foreach() IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Router.php IN LINE 335
+==================================================================================================
+[2019-02-11 21:23:01] E_WARNING (code 2) | Invalid argument supplied for foreach() IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Router.php IN LINE 335
+==================================================================================================
+[2019-02-11 21:41:55] E_WARNING (code 2) | array_keys() expects parameter 1 to be array, null given IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Request.php IN LINE 76
+==================================================================================================
+[2019-02-11 21:44:26] E_WARNING (code 2) | array_keys() expects parameter 1 to be array, null given IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Request.php IN LINE 76
+==================================================================================================
+[2019-02-11 22:03:53] E_WARNING (code 2) | array_keys() expects parameter 1 to be array, null given IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Request.php IN LINE 76
+==================================================================================================
+[2019-02-11 22:07:31] E_WARNING (code 2) | Illegal offset type in isset or empty IN FILE G:\server\OSPanel\domains\slt.local\slt\modules\Auth\Auth.php IN LINE 93
+==================================================================================================

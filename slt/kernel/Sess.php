@@ -2,6 +2,10 @@
 namespace Kernel;
 
 class Sess{
+
+    public static function init(){
+        session_start();
+    }
     
     public static function get($name){      
         if(!isset($_SESSION)){
@@ -80,5 +84,3 @@ class Sess{
         return true;
     }
 }
-
-?>

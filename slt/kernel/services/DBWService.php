@@ -58,7 +58,34 @@ class DBWService{
         DBW::$createParams[$o->rowname]['int('.$count.')'] = array();
         return $o;
     }
-    
+
+    public function bigint($rowname,$count = false){
+        $o = $this->row($rowname);
+        $str = $count ? 'bigint('.$count.')' : 'bigint';
+        DBW::$createParams[$o->rowname][$str] = array();
+        return $o;
+    }
+
+    public function real($rowname,$count = false){
+        $o = $this->row($rowname);
+        $str = $count ? 'real('.$count.')' : 'real';
+        DBW::$createParams[$o->rowname][$str] = array();
+        return $o;
+    }
+
+    public function double($rowname,$count = false){
+        $o = $this->row($rowname);
+        $str = $count ? 'double('.$count.')' : 'double';
+        DBW::$createParams[$o->rowname][$str] = array();
+        return $o;
+    }
+
+    public function boolean($rowname){
+        $o = $this->row($rowname);
+        DBW::$createParams[$o->rowname]['boolean'] = array();
+        return $o;
+    }
+
     public function varchar($rowname,$count = 255){
         $o = $this->row($rowname);
         DBW::$createParams[$o->rowname]['varchar('.$count.')'] = array();
@@ -129,4 +156,3 @@ class DBWService{
         return DBW::run();
     }
 }
-?>

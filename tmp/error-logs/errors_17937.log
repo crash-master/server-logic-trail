@@ -1,0 +1,12 @@
+[2019-02-10 21:54:31] E_WARNING (code 2) | include_once(slt/modules/Auth/redirect.map.php): failed to open stream: No such file or directory IN FILE G:\server\OSPanel\domains\slt.local\slt\modules\Auth\Auth.php IN LINE 28
+-------------------------------------------------
+[2019-02-10 21:54:31] E_WARNING (code 2) | include_once(): Failed opening 'slt/modules/Auth/redirect.map.php' for inclusion (include_path='.;g:/server/ospanel/modules/php/PHP-7.1-x64;g:/server/ospanel/modules/php/PHP-7.1-x64/PEAR/pear') IN FILE G:\server\OSPanel\domains\slt.local\slt\modules\Auth\Auth.php IN LINE 28
+==================================================================================================
+[2019-02-10 21:55:01] E_WARNING (code 2) | include_once(slt/modules/Auth/redirect.map.php): failed to open stream: No such file or directory IN FILE G:\server\OSPanel\domains\slt.local\slt\modules\Auth\Auth.php IN LINE 28
+-------------------------------------------------
+[2019-02-10 21:55:01] E_WARNING (code 2) | include_once(): Failed opening 'slt/modules/Auth/redirect.map.php' for inclusion (include_path='.;g:/server/ospanel/modules/php/PHP-7.1-x64;g:/server/ospanel/modules/php/PHP-7.1-x64/PEAR/pear') IN FILE G:\server\OSPanel\domains\slt.local\slt\modules\Auth\Auth.php IN LINE 28
+==================================================================================================
+[2019-02-10 21:55:49] E_WARNING (code 2) | include_once(slt/modules/Auth/redirect.map.php): failed to open stream: No such file or directory IN FILE G:\server\OSPanel\domains\slt.local\slt\modules\Auth\Auth.php IN LINE 28
+-------------------------------------------------
+[2019-02-10 21:55:49] E_WARNING (code 2) | include_once(): Failed opening 'slt/modules/Auth/redirect.map.php' for inclusion (include_path='.;g:/server/ospanel/modules/php/PHP-7.1-x64;g:/server/ospanel/modules/php/PHP-7.1-x64/PEAR/pear') IN FILE G:\server\OSPanel\domains\slt.local\slt\modules\Auth\Auth.php IN LINE 28
+==================================================================================================

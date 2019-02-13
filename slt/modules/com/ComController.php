@@ -101,12 +101,7 @@ class ComController{
 	}
 	
 	public function migrationDown($name){
-		global $SLT_APP_NAME;
 		if(Config::get('system -> migration') == 'on'){
-			if(!file_exists($SLT_APP_NAME . '/migrations/'.$name.'Migration.php')){
-				return 'FALSE';
-			}
-			
 			if(Maker::unsetMigration([NULL, $name])){
 				return 'TRUE';
 			}
@@ -119,11 +114,6 @@ class ComController{
 	}
 	
 	public function migrationUp($name){
-		global $SLT_APP_NAME;
-		if(!file_exists($SLT_APP_NAME . '/migrations/'.$name.'Migration.php')){
-			return 'FALSE';
-		}
-
 		if(!Maker::setMigration([NULL, $name])){
 			throw new Exception('ERR Com',"Migration {$name} was not unset");
 			return 'FALSE';

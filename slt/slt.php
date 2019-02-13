@@ -14,6 +14,8 @@ class SLT{
 		IncludeControll::appRootInit();
 		IncludeControll::loadKernel();
 
+		Sess::init();
+
 		Cache::autoclear_not_relevant_cache();
 		
 		$other_global_slt_vars = [

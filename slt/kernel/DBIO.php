@@ -15,6 +15,9 @@ class Connect{
 	}
 
 	public static function start(){
+		if(!is_null(self::$config)){
+			return false;
+		}
 		self::$config = Config::get('system -> DB');
 		self::open_connect();
 		self::$countQuery = 0;
@@ -321,6 +324,18 @@ class DBIO{
 	
 	public static function truncate($tablename){
 		return self::fq('TRUNCATE TABLE `'.$tablename.'`');
+	}
+
+	public static function table_exists($tablename){
+		$table_list = Connect::getTableList();
+		$key = 'Tables_in_' . Connect::$config['dbname'];
+		foreach($table_list as $item){
+			if($item[$key] == $tablename){
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
 

@@ -4,7 +4,7 @@ namespace Kernel;
 class Maker{
 	public static $params;
 
-	public static function setMigration($params = NULL){
+	public static function setMigration($params = NULL, $custom_path = false){
 		global $SLT_APP_NAME;
 		try{
 			if(Config::get('system -> migration') != "on"){
@@ -18,7 +18,13 @@ class Maker{
 		if(is_null($params)){
 			$params = self::$params;
 		}
-		@include_once($SLT_APP_NAME . '/migrations/'.$params[1].'Migration.php');
+
+		$path_to_migration_file = !$custom_path ? $SLT_APP_NAME . '/migrations/'.$params[1].'Migration.php' : $custom_path.$params[1].'Migration.php';
+
+		if(!file_exists($path_to_migration_file)){
+			return false;
+		}
+		@include_once($path_to_migration_file);
 		@call_user_func(array($params[1].'Migration','up'));
 		
 		CodeTemplate::create('model', ['modelname' => $params[1], 'tablename' => $params[1], 'filename' => $params[1]]);
@@ -35,7 +41,8 @@ class Maker{
 		return true;
 	}
 
-	public static function unsetMigration($params = NULL){
+	public static function unsetMigration($params = NULL, $custom_path = false){
+		global $SLT_APP_NAME;
 		try{
 			if(Config::get('system -> migration') != "on"){
 				throw new Exception('Migration set to off in slt/config/main.config.php');
@@ -49,9 +56,13 @@ class Maker{
 			$params = self::$params;
 		}
 
-		$migrationPath = self::getPathToMigrationFileOnName($params[1]);
+		$path_to_migration_file = !$custom_path ? $SLT_APP_NAME . '/migrations/'.$params[1].'Migration.php' : $custom_path.$params[1].'Migration.php';
 
-		@include_once($migrationPath);
+		if(!file_exists($path_to_migration_file)){
+			return false;
+		}
+
+		@include_once($path_to_migration_file);
 		@call_user_func(array($params[1].'Migration','down'));
 
 		return true;

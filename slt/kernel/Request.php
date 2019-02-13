@@ -73,6 +73,9 @@ class Request{
     }
 
     private static function _clear($arr){
+        if(!count($arr)){
+            return $arr;
+        }
         $keys = array_keys($arr);
         $count = count($arr);
         for($i=0;$i<$count;$i++){

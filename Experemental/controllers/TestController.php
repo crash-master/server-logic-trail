@@ -28,7 +28,7 @@ class TestController{
 		return model('Test') -> update(['username' => $new_entry], ['id', '=', $id]);
 	}
 
-	public function head_component(){
-		return ["title" => "Hello"];
+	public function auth(){
+		return is_signined() ? 'true' : 'false';
 	}
 }
