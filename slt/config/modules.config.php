@@ -1,8 +1,6 @@
 <?php
 
 return [
-    
-    'com',
+    'Com',
     'Auth'
-    
 ];
