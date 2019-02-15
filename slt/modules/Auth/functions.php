@@ -80,3 +80,23 @@ function change_account_role($user_id, $new_role){
 function is_signined(){
 	return module('Auth') -> is_signined();
 }
+
+function signin_form_controller(){
+	return '/auth/form/signin';
+}
+
+function signup_form_controller(){
+	return '/auth/form/signup';
+}
+
+function route_to_signout_controller(){
+	return '/auth/signout';
+}
+
+function link_to_signin_page(){
+	return '/auth/signin-page';
+}
+
+function link_to_signup_page(){
+	return '/auth/signup-page';
+}

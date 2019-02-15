@@ -10,7 +10,24 @@
 function auth_config(){
 	return [
 		'signin_field_name' => 'nickname',
-		'min_password_length' => 6
+		'min_password_length' => 6,
+		
+		/**
+		 * flags about using default pages
+		 */
+		'use_default_pages' => [
+			'signin' => true,
+			'signup' => true,
+			'signout' => true
+		],
+
+		/**
+		 * paths to view default pages
+		 */
+		'page_view' => [
+			'signin' => auth_path('view/signin'),
+			'signup' => auth_path('view/signup')
+		]
 	];
 }
 

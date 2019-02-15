@@ -13,7 +13,7 @@ class AuthController{
 		if($SLT_DEBUG != 'on'){
 			return redirect('/');
 		}
-		if(!DBIO::table_exists('Users')){
+		if(!DBIO::table_exists('Users') or !file_exists($SLT_APP_NAME . '/auth.settings.php')){
 			if(module('Auth') -> install()){
 				return "<h1>Installation was done</h1>";
 			}
@@ -37,13 +37,19 @@ class AuthController{
 	}
 
 	public function signup_page(){
+		if(!module('Auth') -> use_default_pages['signup']){
+			return redirect('/page_not_found');
+		}
 		$title = 'SignUp';
-		return view(auth_path('view/signup'), compact('title'));
+		return view(module('Auth') -> page_view['signup'], compact('title'));
 	}
 
 	public function signin_page(){
+		if(!module('Auth') -> use_default_pages['signin']){
+			return redirect('/page_not_found');
+		}
 		$title = 'SignIn';
-		return view(auth_path('view/signin'), compact('title'));
+		return view(module('Auth') -> page_view['signin'], compact('title'));
 	}
 
 	public function signup(){
@@ -69,6 +75,9 @@ class AuthController{
 	}
 
 	public function signout(){
+		if(!module('Auth') -> use_default_pages['signout']){
+			return redirect('/page_not_found');
+		}
 		module('Auth') -> signout();
 		return redirect('/auth/signin-page');
 	}	
