@@ -38,6 +38,7 @@ class Cache{
 	}
 
 	public static function set($name, $cache_data){
+		Events::register('cache_data_create', ['cache_alias' => $name, 'cache_data' => $cache_data]);
 		$file_path = self::get_path_to_cache_file($name);
 		$data = serialize($cache_data);
 		return file_put_contents($file_path, $data);
@@ -48,7 +49,9 @@ class Cache{
 	}
 
 	public static function get($name){
-		return unserialize(file_get_contents(self::get_path_to_cache_file($name)));
+		$data = unserialize(file_get_contents(self::get_path_to_cache_file($name)));
+		Events::register('cache_data_used', ['cache_alias' => $name, 'cache_data' => $data]);
+		return $data;
 	}
 
 	public static function remove($name){
