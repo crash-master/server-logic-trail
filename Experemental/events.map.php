@@ -10,6 +10,7 @@ use Middleware\Kernelevents\Error;
 use Middleware\Kernelevents\Router;
 use Middleware\Kernelevents\View;
 use Middleware\Kernelevents\Cache;
+use Middleware\Kernelevents\Model;
 
 function events_map(){
 	on_event('load_kernel', function(){
@@ -70,6 +71,22 @@ function events_map(){
 
 	on_event('cache_data_used', function($cache){
 		(new Cache()) -> cache_data_used($cache['cache_alias'], $cache['cache_data']);
+	});
+
+	on_event('get_from_table', function($params){
+		(new Model()) -> get_from_table($params['tablename'], $params['data']);
+	});
+
+	on_event('set_to_table', function($params){
+		(new Model()) -> set_to_table($params['tablename'], $params['data']);
+	});
+
+	on_event('update_table', function($params){
+		(new Model()) -> update_table($params['tablename'], $params['data'], $params['where']);
+	});
+
+	on_event('remove_from_table', function($params){
+		(new Model()) -> remove_from_table($params['tablename'], $params['where']);
 	});
 
 }
