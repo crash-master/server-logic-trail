@@ -10,7 +10,3 @@ use Kernel\Router;
 
 route_not_found('IndexController@not_found_page');
 route('/', 'IndexController@welcome_page');
-route('TestController', ['head_component']);
-route('/test/new-entry/{entry}', 'TestController@new_entry');
-route('/test/update-entry/{id}/{new_entry}', 'TestController@update_entry');
-route('AdminController');

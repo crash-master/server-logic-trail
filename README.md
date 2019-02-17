@@ -1,0 +1,3 @@
+SERVER LOGIC TRAIL
+
+Version 1.0 beta

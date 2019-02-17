@@ -1,6 +1,6 @@
 <?php
 
 function components_map(){
-	component("Head", "/test-layouts/head", "\Components\MainController@main_component");
+	// component("COMPONENT_NAME", "PATH_TO_LAYOUT", "CONTROLLER")
 }
 
