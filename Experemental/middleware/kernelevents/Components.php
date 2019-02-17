@@ -7,7 +7,7 @@ class Components{
 	}
 
 	public function call_component($component){
-
+		
 	}
 
 	public function ready_component_data($component_name, $component_data){

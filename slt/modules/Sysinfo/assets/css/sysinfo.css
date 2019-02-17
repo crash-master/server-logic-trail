@@ -1,0 +1,30 @@
+.sysinfo-container{
+	position: fixed;
+	left: -420px;
+	width: 420px;
+	background-color: #fff;
+	top: 0;
+	transition-duration: .3s;
+	height: 100%;
+	box-sizing: border-box;
+	padding: 15px;
+	overflow-y: auto;
+}
+
+.sysinfo-container .show-info{
+	position: fixed;
+	left: 15px;
+	top: 100%;
+	transition-duration: .2s;
+	margin-top: -100px;
+}
+
+.sysinfo-container.show{
+	left: 0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+}
+
+.sysinfo-container.show .show-info{
+	left: 435px;
+}
+

@@ -2,5 +2,6 @@
 
 return [
     'Com',
-    'Auth'
+    'Auth',
+    'Sysinfo'
 ];

@@ -14,7 +14,7 @@ class TestController{
 
 	public function all_entries(){
 		return cache_code('all.entries', function(){
-			return model('Test') -> all();
+			return view("all.entries", ['entries' => model('Test') -> all()]);
 		});
 	}
 
