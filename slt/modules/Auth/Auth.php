@@ -116,6 +116,16 @@ class Auth{
 			CodeTemplate::create('auth.settings', ['filename' => 'auth.settings'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/');
 		}
 
+		$auth_events_map_file = $SLT_APP_NAME . '/auth.events.map.php';         
+		if(!file_exists($auth_events_map_file)){
+			CodeTemplate::create('auth.events.map', ['filename' => 'auth.events.map'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/');
+		}
+
+		$Auth_file = $SLT_APP_NAME . '/Auth.php';
+		if(!file_exists($Auth_file)){
+			CodeTemplate::create('Auth', ['filename' => 'Auth'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/middleware/kernelevents/');
+		}
+
 		return true;
 	}
 
