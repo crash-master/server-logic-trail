@@ -12,6 +12,6 @@ return [
         ],
         'migration' => 'on',
         'debug' => 'on',
-        'cache' => 'on'
+        'cache' => 'off'
     ]
 ];

@@ -14,10 +14,14 @@ class Sysinfo{
 	public $cache_use_list = [];
 
 	public function __construct(){
-		global $SLT_DEBUG;
-		$this -> state = $SLT_DEBUG == 'on' ? true : false;
+		$this -> state = isset($_GET['sysinfo']) ? true : false;
 		$this -> p2m = Module::pathToModule('Sysinfo');
+		if($this -> state){
+			$this -> set_event_listeners();
+		}
+	}
 
+	public function set_event_listeners(){
 		Events::on('app_finished', function(){
 			module('Sysinfo') -> last_logic_and_draw_info();
 		});
