@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Com',
-    'Auth',
-    'Sysinfo'
+    //'Com',
+    //'Auth',
+    //'Sysinfo'
 ];

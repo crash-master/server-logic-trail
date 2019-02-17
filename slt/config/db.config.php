@@ -1,16 +1,16 @@
 <?php
 
 return [
-    'dbtype' => 'mysql',
+	'dbtype' => 'mysql',
 
-    'host' => 'localhost',
+	'host' => 'localhost',
 
-    'user' => 'root',
+	'user' => 'root',
 
-    'password' => '',
+	'password' => '',
 
-    'dbname' => 'slt.local',
+	'dbname' => '',
 
-    'charset' => 'utf8'
+	'charset' => 'utf8'
 
 ];
