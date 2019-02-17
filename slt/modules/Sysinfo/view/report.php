@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-<link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
-<link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+<link rel="stylesheet" href="/<?= \Kernel\Module::pathToModule('Sysinfo') ?>assets/css/normalize.css">
+<link rel="stylesheet" href="/<?= \Kernel\Module::pathToModule('Sysinfo') ?>assets/css/milligram.css">
 <link rel="stylesheet" href="/<?= \Kernel\Module::pathToModule('Sysinfo') ?>assets/css/sysinfo.css">
-<?// dd($components_list) ?>
-<div class="sysinfo-container">
+
+<div class="milligram sysinfo-container">
 	<button class="button-outline show-info">Sysinfo</button>
 	<div class="report">
 		<table>
