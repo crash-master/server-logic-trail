@@ -7,6 +7,7 @@ class SLT{
 		header('Access-Control-Allow-Origin: *');
 
 		$this -> init_slt_vars($params);
+		$this -> init_slt_vars(['start_point_time' => microtime()]);
 
 		include_once('slt/kernel/IncludeControll.php');
 

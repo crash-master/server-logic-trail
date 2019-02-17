@@ -7,6 +7,7 @@ use Kernel\Maker;
 use Kernel\DBIO;
 use Kernel\CodeTemplate;
 use Kernel\Sess;
+use Kernel\Events;
 
 class Auth{
 	/**
@@ -193,6 +194,7 @@ class Auth{
 	 * @return [bool] [description]
 	 */
 	public function signout(){
+		Events::register('auth_signout', ['user_card' => Sess::get('user_card')]);
 		return Sess::kill('user_card');
 	}
 

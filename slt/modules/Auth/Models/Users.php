@@ -3,6 +3,7 @@
 namespace Modules\Auth\Models;
 
 use Kernel\Sess;
+use Kernel\Events;
 
 class Users extends \Extend\Model{
 	public $table = 'Users';
@@ -39,6 +40,7 @@ class Users extends \Extend\Model{
 			return 3;
 		}
 		
+		Events::register('auth_signup', ['user' => $user]);
 		$this -> set($user);
 
 		return false;
@@ -60,6 +62,7 @@ class Users extends \Extend\Model{
 			return 5;
 		}
 
+		Events::register('auth_signin', ['user_card' => $user_card]);
 		Sess::set('user_card', $user_card);
 
 		return $user_card;
