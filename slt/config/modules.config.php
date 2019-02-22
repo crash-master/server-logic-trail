@@ -3,5 +3,7 @@
 return [
     //'Com',
     //'Auth',
-    //'Sysinfo'
+    //'Sysinfo',
+    //'ViewMaster',
+    //'AjaxHelper'
 ];
