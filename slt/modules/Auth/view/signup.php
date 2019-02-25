@@ -22,8 +22,8 @@
 					    		<input type="password" id="password" name="password" class="form-control" placeholder="Your Password">
 					    	</div>
 					    	<div class="form-group">
-					    		<label for="password2">Your Password Again</label>
-					    		<input type="password" id="password2" name="password2" class="form-control" placeholder="Your Password Again">
+					    		<label for="password_again">Your Password Again</label>
+					    		<input type="password" id="password_again" name="password_again" class="form-control" placeholder="Your Password Again">
 					    	</div>
 					    </p>
 					    <button class="btn btn-primary card-link">Sign Up</button>

@@ -39,9 +39,9 @@ class Users extends \Extend\Model{
 		if($this -> length([$this -> auth_module -> signin_field_name, '=', $user[$this -> auth_module -> signin_field_name]])){
 			return 3;
 		}
-		
-		Events::register('auth_signup', ['user' => $user]);
+
 		$this -> set($user);
+		Events::register('auth_signup', ['user' => $user]);
 
 		return false;
 	}
@@ -62,8 +62,8 @@ class Users extends \Extend\Model{
 			return 5;
 		}
 
-		Events::register('auth_signin', ['user_card' => $user_card]);
 		Sess::set('user_card', $user_card);
+		Events::register('auth_signin', ['user_card' => $user_card]);
 
 		return $user_card;
 	}

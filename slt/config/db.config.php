@@ -9,7 +9,7 @@ return [
 
 	'password' => '',
 
-	'dbname' => '',
+	'dbname' => 'slt.local',
 
 	'charset' => 'utf8'
 

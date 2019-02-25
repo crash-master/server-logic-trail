@@ -60,7 +60,8 @@ class AuthController{
 		if($err){
 			return $err; 
 		}
-		return redirect('/auth/signup-page');
+
+		return redirect(link_to_signin_page());
 	}
 
 	public function signin(){
@@ -71,7 +72,8 @@ class AuthController{
 		if($err){
 			return $err; 
 		}
-		return redirect('/auth/signin-page');
+
+		return redirect('/');
 	}
 
 	public function signout(){
@@ -79,6 +81,6 @@ class AuthController{
 			return redirect('/page_not_found');
 		}
 		module('Auth') -> signout();
-		return redirect('/auth/signin-page');
+		return redirect(link_to_signin_page());
 	}	
 }

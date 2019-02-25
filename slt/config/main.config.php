@@ -12,6 +12,9 @@ return [
         ],
         'migration' => 'on',
         'debug' => 'on',
-        'cache' => 'off'
+        'cache' => 'on',
+        'model' => [
+            'object_returning' => false
+        ]
     ]
 ];

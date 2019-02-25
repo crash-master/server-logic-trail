@@ -6,7 +6,6 @@ use Middleware\Kernelevents\Base;
 use Middleware\Kernelevents\Components;
 use Middleware\Kernelevents\Controllers;
 use Middleware\Kernelevents\DB;
-use Middleware\Kernelevents\Error;
 use Middleware\Kernelevents\Router;
 use Middleware\Kernelevents\View;
 use Middleware\Kernelevents\Cache;
@@ -62,7 +61,7 @@ function events_map(){
 	});
 
 	on_event('error_was_found', function($error){
-		(new Error()) -> error_was_found($error);
+		//(new Error()) -> error_was_found($error);
 	});
 
 	on_event('cache_data_create', function($cache){

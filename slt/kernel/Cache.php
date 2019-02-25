@@ -67,7 +67,9 @@ class Cache{
 		}
 
 		$code_result = $code_in_func();
-		self::set($name, $code_result);
+		if($SLT_CACHE == 'on'){
+			self::set($name, $code_result);
+		}
 		return $code_result;
 	}
 }

@@ -1,7 +1,6 @@
 <?php
 use Kernel\{
 	Router,
-	Err,
 	Model,
 	Module,
 	View,
@@ -59,6 +58,7 @@ function redirect($url, $vars = []){
 		$url = linkTo($url, $vars);
 	}
 	header('Location: '.$url);
+	die();
 	return true;
 }
 
@@ -85,7 +85,7 @@ function atarr($arr){
 }
 
 function model($name){
-	return Model::register($name);
+	return call_user_func([$name, 'ins']);
 }
 
 function module($name){

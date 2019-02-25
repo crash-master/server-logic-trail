@@ -78,8 +78,8 @@ class Auth{
 		if(file_exists($path_to_settings_file)){
 			include_once($path_to_settings_file);
 			$auth_config = auth_config();
-			$this -> signin_field_name = isset($auth_config['signin_field_name']) and !empty($auth_config['signin_field_name']) ? $auth_config['signin_field_name'] : 'nickname';
-			$this -> min_password_length = isset($auth_config['min_password_length']) and $auth_config['min_password_length'] ? $auth_config['min_password_length'] : 6;
+			$this -> signin_field_name = (isset($auth_config['signin_field_name']) and !empty($auth_config['signin_field_name'])) ? $auth_config['signin_field_name'] : 'nickname';
+			$this -> min_password_length = (isset($auth_config['min_password_length']) and $auth_config['min_password_length']) ? $auth_config['min_password_length'] : 6;
 			$this -> role_list = auth_role_list();
 			$this -> err_messages = auth_error_messages();
 			if(isset($auth_config['use_default_pages']) and is_array($auth_config['use_default_pages'])){
@@ -96,6 +96,12 @@ class Auth{
 			}
 
 			$this -> redirect_controll();
+
+			$auth_events_file = $SLT_APP_NAME . '/auth.events.map.php';
+			if(file_exists($auth_events_file)){
+				include_once($auth_events_file);
+				auth_events_map();
+			}
 		}else{
 			echo '(Auth module) Installation required <a href="/auth/install">Installation</a>';
 		}
@@ -181,8 +187,7 @@ class Auth{
 	 */
 	public function get_err_by_errcode($errcode){
 		$err_messages = $this -> err_messages;
-
-		return is_int($errcode) and isset($err_messages[$errcode]) ? $err_messages[$errcode] : false;
+		return (is_int($errcode) and isset($err_messages[$errcode])) ? $err_messages[$errcode] : false;
 	}
 
 	/**
@@ -204,8 +209,9 @@ class Auth{
 	 * @return [bool] [description]
 	 */
 	public function signout(){
+		Sess::kill('user_card');
 		Events::register('auth_signout', ['user_card' => Sess::get('user_card')]);
-		return Sess::kill('user_card');
+		return true;
 	}
 
 	/**
