@@ -24,7 +24,9 @@ class ViewMaster{
 			$file = basename($file);
 			if($file[0] == '_' and (strpos($file, 'controller') !== false or strpos($file, 'component') !== false)){
 				list($type, $controller, $action) = explode('.', $file);
+				$action = str_replace(['!', '*', '@', '#', '$', '%', '^', ':', '/', '-', '&', '(', ')', '+', '='], '_', $action);
 				$controller[0] = strtoupper($controller[0]);
+				$controller = str_replace(['!', '*', '@', '#', '$', '%', '^', ':', '/', '-', '&', '(', ')', '+', '='], '', $controller);
 				$this -> create_list[$files[$i]] = compact('controller', 'action', 'type');
 			}
 		}
@@ -59,23 +61,10 @@ class ViewMaster{
 			$new_name = str_replace($item['type'].'.', '', $view);
 			rename($view, $new_name);
 			$view_file = str_replace($item['type'].'.', '', $view_file);
-			$open_controller .= "
-	public function {$item['action']}(){
-		return view('{$view_file}');
-	}
-}";
+			$open_controller .= $this -> get_method_code($item['type'], $item['action'], $view_file);
 			file_put_contents($controller_file, $open_controller);
 
-			if($item['type'] == '_controller'){
-				// add route
-				$web = file_get_contents($SLT_APP_NAME . '/routes/web.php');
-				if(strpos($web, '?>') !== false){
-					$web = str_replace('?>', '', $web);
-				}
-
-				$web .= "\nroute('{$item['controller']}Controller@{$item['action']}');";
-				file_put_contents($SLT_APP_NAME . '/routes/web.php', $web);
-			}
+			$this -> add_to_some_map($item);
 		}
 	}
 
@@ -89,5 +78,40 @@ class ViewMaster{
 		}
 
 		return false;
+	}
+
+	public function get_method_code($type, $meth_name, $view){
+		if($type == '_controller'){
+return "	public function {$meth_name}(){
+		return view('{$view}');
+	}
+}";
+		}elseif($type == '_component'){
+return "	public function {$meth_name}(\$var = null){
+		return compact('var');
+	}
+}";
+		}
+
+		return '';
+	}
+
+	public function add_to_some_map($item){
+		global $SLT_APP_NAME;
+
+		if($item['type'] == '_controller'){
+			// add route
+			$web = file_get_contents($SLT_APP_NAME . '/routes/web.php');
+			if(strpos($web, '?>') !== false){
+				$web = str_replace('?>', '', $web);
+			}
+
+			$web .= "\nroute('{$item['controller']}Controller@{$item['action']}');";
+			file_put_contents($SLT_APP_NAME . '/routes/web.php', $web);
+		}elseif($item['type'] == '_component'){
+			// add component
+			//$web = file_get_contents($SLT_APP_NAME . '/routes/web.php');
+
+		}
 	}
 }
