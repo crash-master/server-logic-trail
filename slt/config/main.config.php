@@ -11,10 +11,10 @@ return [
             'LogStorageLifeInDays' => 5
         ],
         'migration' => 'on',
-        'debug' => 'on',
+        'debug' => 'off',
         'cache' => 'on',
         'model' => [
-            'object_returning' => false
+            'returning' => 'inobject' // or inarray
         ]
     ]
 ];

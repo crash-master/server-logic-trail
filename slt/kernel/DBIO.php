@@ -124,6 +124,12 @@ class DBIO{
 		if($count > 3){
 			for($i=0;$i<$count;$i += 3){
 				if($where[$i+1] == 'IN'){
+					if(is_array($where[$i+2])){
+						if(!count($where[$i+2])){
+							$where[$i+2][] = 0;
+						}
+						$where[$i+2] = '(' . implode(',', $where[$i+2]) . ')';
+					}
 					$sql .= '`'.addslashes($where[$i]).'`'.$where[$i+1].' '.$where[$i+2].' ';
 				}else{
 					$sql .= '`'.addslashes($where[$i]).'`'.$where[$i+1].'\''.addslashes($where[$i+2]).'\'';
@@ -136,6 +142,12 @@ class DBIO{
 			}
 		}else{
 			if($where[1] == 'IN'){
+				if(is_array($where[2])){
+					if(!count($where[2])){
+						$where[2][] = 0;
+					}
+					$where[2] = '(' . implode(',', $where[2]) . ')';
+				}
 				$sql .= '`'.addslashes($where[0]).'`'.$where[1].' '.$where[2].' ';
 			}else{
 				$sql .= '`'.addslashes($where[0]).'`'.$where[1].'\''.addslashes($where[2]).'\'';

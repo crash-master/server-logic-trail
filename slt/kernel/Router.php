@@ -49,8 +49,16 @@ class Router{
 		if(!self::$do_cache_flag){
 			return false;
 		}
+		$data = [];
+		foreach(self::$data as $key => $val){
+			if(!is_string($val)){
+				continue;
+			}
+			$data[$key] = $val;
+		}
+
 		Cache::set('routes.map', [
-			'data' => self::$data,
+			'data' => $data,
 			'action404' => self::$action404,
 			'post' => self::$post
 		]);
@@ -299,7 +307,7 @@ class Router{
 
 	public static function get($route, $action){
 		self::init();
-		if(self::$cache_flag){
+		if(self::$cache_flag and !is_object($action)){
 			return false;
 		}
 		self::addRoute(array('route'=>$route,'action'=>$action));
@@ -451,9 +459,10 @@ class Router{
 
 	public static function route_universe($param1, $param2 = false, $param3 = false){
 		self::init();
-		if(self::$cache_flag){
+		if(self::$cache_flag and !is_object($param2)){
 			return false;
 		}
+
 		if($param1 and !$param2 and !$param3){
 			if(!is_array($param1) and strpos($param1, '@') !== false){
 				// this is action

@@ -47,13 +47,14 @@ class Users extends \Extend\Model{
 	}
 
 	public function signin($user){
+		global $SLT_INARR;
 		if(!isset($user['password']) or !isset($user[$this -> auth_module -> signin_field_name]) or empty($user[$this -> auth_module -> signin_field_name])){
 			return 1;
 		}
 
 		$user['password'] = sha1($user['password']);
 
-		$user_card = $this -> get([$this -> auth_module -> signin_field_name, '=', $user[$this -> auth_module -> signin_field_name]]);
+		$user_card = $this -> get([$this -> auth_module -> signin_field_name, '=', $user[$this -> auth_module -> signin_field_name]], $SLT_INARR);
 		if(!$user_card){
 			return 4;
 		}
@@ -69,7 +70,7 @@ class Users extends \Extend\Model{
 	}
 
 	public function get_user($user_id){
-		return $this -> get(['id', '=', $user_id]);
+		return $this -> get(['id', '=', $user_id], $SLT_INARR);
 	}
 
 	public function confirm($user_id){

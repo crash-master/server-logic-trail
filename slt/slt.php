@@ -21,7 +21,9 @@ class SLT{
 		
 		$other_global_slt_vars = [
 			'cache' => Config::get() -> system -> cache,
-			'debug' => Config::get() -> system -> debug
+			'debug' => Config::get() -> system -> debug,
+			'inobj' => 'inobject',
+			'inarr' => 'inarray'
 		];
 		$this -> init_slt_vars($other_global_slt_vars);
 

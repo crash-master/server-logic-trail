@@ -11,27 +11,28 @@ use Kernel\Services\EssenceDataWrap;
 
 class Model{
 
-	private static $instance;
+	private static $instance = [];
 	private static $config;
 	private static $tmp_one_flag = false;
 
 	public static function ins(){
-		if(!self::$instance){
-			$classname = get_called_class();
+		$classname = get_called_class();
+		if(!isset(self::$instance[$classname])){
 			self::$config = \Kernel\Config::get() -> system -> model;
-			self::$instance = new $classname();
+			self::$instance[$classname] = new $classname();
 		}
 
-		return self::$instance;
+		return self::$instance[$classname];
 	}
 
 	public function q($sql){
 		return DBIO::fq($sql);
 	}
 
-	private function returned_data($data, $one = true, $please_give_another = false){
-		$obj_ret_flag = !$please_give_another ? self::$config -> object_returning : !self::$config -> object_returning;
-		if(!$obj_ret_flag){
+	private function returned_data($data, $one = true, $returning_entity = null){
+		global $SLT_INARR, $SLT_INOBJ;
+		$returning_entity = !is_null($returning_entity) ?: self::$config -> returning;
+		if($returning_entity == $SLT_INARR){
 			return $data;
 		}
 
@@ -39,7 +40,7 @@ class Model{
 			return new EssenceDataWrap($data, $this);
 		}
 
-		$exacly_array = isset($data[0]) ? $data : [$data];
+		$exacly_array = (isset($data[0]) and !empty($data)) ? $data : [$data];
 		$ret = [];
 		$count = count($exacly_array);
 		for($i=0; $i<$count; $i++){
@@ -49,7 +50,7 @@ class Model{
 		return $ret;
 	}
 
-	public function get($params = NULL, $please_give_another = false){
+	public function get($params = NULL, $please_give_another = null){
 		if(count($params) > 2 and !isset($params['where']) and !isset($params['order']) and !isset($params['limit'])){
 			$params['where'] = $params;
 		}
@@ -59,7 +60,7 @@ class Model{
 		return $this -> returned_data($data, false, $please_give_another);
 	}
 
-	public function all($type = "ASC", $please_give_another = false){
+	public function all($type = "ASC", $please_give_another = null){
 		$data = (new Essence($this)) -> get(NULL, [
 			'order' => ['id', $type]
 		]);
@@ -68,7 +69,7 @@ class Model{
 		return $this -> returned_data($data, false, $please_give_another);
 	}
 
-	public function first($please_give_another = false){
+	public function first($please_give_another = null){
 		$data = (new Essence($this)) -> get(NULL, [
 			'order' => ['id', 'ASC'],
 			'limit' => [0, 1]
@@ -77,7 +78,7 @@ class Model{
 		return $this -> returned_data($data, true, $please_give_another);
 	}
 
-	public function last($please_give_another = false){
+	public function last($please_give_another = null){
 		$data = (new Essence($this)) -> get(NULL, [
 			'order' => ['id', 'DESC'],
 			'limit' => [0, 1]
@@ -126,7 +127,12 @@ class Model{
 	}
 
 	public function __call($methname, $params){
-		return $this -> get([$methname, '=', $params[0]], $params[1]);
+		if(is_array($params[0])){
+			$s = 'IN';
+		}else{
+			$s = '=';
+		}
+		return $this -> get([$methname, $s, $params[0]], $params[1]);
 	}
 
 	public function one(){

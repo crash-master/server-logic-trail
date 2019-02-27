@@ -22,7 +22,7 @@ class RecursiveScan{
 	}
 
 	public function get_dirs($start_point, $recursive_flag = true){
-		$res = $this -> get($start_point, $recursive_flag);
+		$res = $this -> get($start_point, $recursive_flag, false);
 		return $res['dirs'];
 	}
 

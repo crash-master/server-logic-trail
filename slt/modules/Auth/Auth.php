@@ -129,7 +129,7 @@ class Auth{
 
 		$Auth_file = $SLT_APP_NAME . '/Auth.php';
 		if(!file_exists($Auth_file)){
-			CodeTemplate::create('Auth', ['filename' => 'Auth'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/middleware/kernelevents/');
+			CodeTemplate::create('Auth', ['filename' => 'Auth'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/middleware/modulesevents/');
 		}
 
 		return true;

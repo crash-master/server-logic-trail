@@ -1,9 +1,9 @@
 <?php
 
 return [
-    //'Com',
-    //'Auth',
-    //'Sysinfo',
+    'Com',
+    'Auth',
+    'Sysinfo',
     //'ViewMaster',
     //'AjaxHelper',
     //'UniOption'
