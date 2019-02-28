@@ -2,109 +2,133 @@
 namespace Kernel;
 
 class Request{
-    private static $urlTemp;
-    private static $args;
-    private static $url;
+	private static $urlTemp;
+	private static $args;
+	private static $url;
+	private static $current_sess_token;
+	private static $future_session_token;
 
-    public static function getArgs($urlTemp = false){
-        if($urlTemp){
-            self::$urlTemp = $urlTemp; 
-        }
-        $url = explode('/',self::getUrl());
-        $uri = explode('/',self::$urlTemp); 
-        
-        $count = count($url);
-        for($i=0;$i<$count;$i++){
-            if(strpos($uri[$i], '{') === false)
-               continue;
-               
-               $name = explode('{',$uri[$i]);
-               list($name) = explode('}',$name[1]);
-               $vars[$name] = $url[$i];
-        }
-            
-        self::$args = $vars;
-        return $vars;
-    }
-    
-    public static function getAll(){
-        return $_GET;
-    }
-    
-    public static function postAll(){
-        return $_POST;
-    }
+	public static function getArgs($urlTemp = false){
+		if($urlTemp){
+			self::$urlTemp = $urlTemp; 
+		}
+		$url = explode('/',self::getUrl());
+		$uri = explode('/',self::$urlTemp); 
+		
+		$count = count($url);
+		for($i=0;$i<$count;$i++){
+			if(strpos($uri[$i], '{') === false)
+			   continue;
+			   
+			   $name = explode('{',$uri[$i]);
+			   list($name) = explode('}',$name[1]);
+			   $vars[$name] = $url[$i];
+		}
+			
+		self::$args = $vars;
+		return $vars;
+	}
+	
+	public static function getAll(){
+		return $_GET;
+	}
+	
+	public static function postAll(){
+		return $_POST;
+	}
 
-    public static function ParseURLModRewrite(){
-        $url = $_SERVER['REQUEST_URI'];
-        if(strpos($url, '?') !== false){
-            list($url) = explode('?', $url);
-        }
-        $url = trim($url, '/');
+	public static function ParseURLModRewrite(){
+		$url = $_SERVER['REQUEST_URI'];
+		if(strpos($url, '?') !== false){
+			list($url) = explode('?', $url);
+		}
+		$url = trim($url, '/');
 
-        self::$url = $url;
-        return $url;
-    }
+		self::$url = $url;
+		return $url;
+	}
 
-    public static function getUrl(){
-        return empty(self::$url) ? self::ParseURLModRewrite() : self::$url;
-    }
-    
-    public static function get($params = false){
-        if(!$params) return self::getAll();
-        return is_array($params) ? self::array_items_from_array($params, $_GET) : $_GET[$params];
-    }
-    
-    public static function post($params = false){
-        if(!$params) return self::postAll();
-        return is_array($params) ? self::array_items_from_array($params, $_POST) : $_POST[$params];
-    }
+	public static function getUrl(){
+		return empty(self::$url) ? self::ParseURLModRewrite() : self::$url;
+	}
+	
+	public static function get($params = false){
+		if(!$params) return self::getAll();
+		return is_array($params) ? self::array_items_from_array($params, $_GET) : $_GET[$params];
+	}
+	
+	public static function post($params = false){
+		if(!$params) return self::postAll();
+		return is_array($params) ? self::array_items_from_array($params, $_POST) : $_POST[$params];
+	}
 
-    private static function array_items_from_array($items, $arr){
-        $res_arr = [];
-        $count = count($items);
-        for($i=0; $i<$count; $i++){
-            if(isset($arr[$items[$i]])){
-                $res_arr[$items[$i]] = $arr[$items[$i]];
-            }
-        }
+	private static function array_items_from_array($items, $arr){
+		$res_arr = [];
+		$count = count($items);
+		for($i=0; $i<$count; $i++){
+			if(isset($arr[$items[$i]])){
+				$res_arr[$items[$i]] = $arr[$items[$i]];
+			}
+		}
 
-        return $res_items;
-    }
+		return $res_items;
+	}
 
-    private static function _clear($arr){
-        if(!count($arr)){
-            return $arr;
-        }
-        $keys = array_keys($arr);
-        $count = count($arr);
-        for($i=0;$i<$count;$i++){
-            $arr[$keys[$i]] = trim(htmlspecialchars($arr[$keys[$i]]));
-        }
-        return $arr;
-    }
-    
-    public static function clearGET(){
-        $_GET = self::_clear($_GET);
-        return true;
-    }
+	private static function _clear($arr){
+		if(!count($arr)){
+			return $arr;
+		}
+		$keys = array_keys($arr);
+		$count = count($arr);
+		for($i=0;$i<$count;$i++){
+			$arr[$keys[$i]] = trim(htmlspecialchars($arr[$keys[$i]]));
+		}
+		return $arr;
+	}
+	
+	public static function clearGET(){
+		$_GET = self::_clear($_GET);
+		return true;
+	}
 
-    public static function clear_get(){
-        $_GET = self::_clear($_GET);
-        return true;
-    }
-    
-    public static function clearPOST(){
-        $_post = self::_clear($_post);
-        return true;
-    }
+	public static function clear_get(){
+		$_GET = self::_clear($_GET);
+		return true;
+	}
+	
+	public static function clearPOST(){
+		$_post = self::_clear($_post);
+		return true;
+	}
 
-    public static function clear_post(){
-        $_post = self::_clear($_post);
-        return true;
-    }
-    
-    public static function clear(){
-        return self::clear_get() and self::clear_post();
-    }
+	public static function clear_post(){
+		$_post = self::_clear($_post);
+		return true;
+	}
+	
+	public static function clear(){
+		return self::clear_get() and self::clear_post();
+	}
+
+	public static function set_future_session_token(){
+		$token = 'session_token_' . sha1(rand(20000, 20000000));
+		self::$future_session_token = $token;
+		Sess::set('session_token', $token);
+	}
+
+	public static function get_future_session_token(){
+		return self::$future_session_token;
+	}
+
+	public static function init_current_session_token(){
+		self::$current_sess_token = Sess::get('session_token');
+	}
+
+	public static function get_session_token(){
+		return self::$current_sess_token;
+	}
+
+	public static function is_secure_session($session_token){
+		return (self::get_session_token() == $session_token) ? true : false;
+	}
 }

@@ -10,7 +10,5 @@ use Kernel\Router;
 
 route_not_found('IndexController@not_found_page');
 route('/', 'IndexController@welcome_page');
-route('ExampleController');
-route('/test', function(){
-	return 'Hello';
-});
+route('IndexController@form');
+route('submit-form', 'IndexController@form_processing', '/form-processing');

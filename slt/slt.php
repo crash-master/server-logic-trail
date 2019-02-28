@@ -17,6 +17,9 @@ class SLT{
 
 		Sess::init();
 
+		Request::init_current_session_token();
+		Request::set_future_session_token();
+
 		Cache::autoclear_not_relevant_cache();
 		
 		$other_global_slt_vars = [
