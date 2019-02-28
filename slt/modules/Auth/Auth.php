@@ -115,7 +115,10 @@ class Auth{
 	 * @return [bool] []
 	 */
 	public function install(){
-		global $SLT_APP_NAME;
+		global $SLT_APP_NAME, $SLT_DEBUG;
+		if($SLT_DEBUG == 'off'){
+			return false;
+		}
 		Maker::setMigration([NULL, 'Users'], $this -> p2m . 'migrations/');
 		$settings_file = $SLT_APP_NAME . '/auth.settings.php';
 		if(!file_exists($settings_file)){
@@ -143,7 +146,10 @@ class Auth{
 	 * @return [bool] []
 	 */
 	public function uninstall(){
-		global $SLT_APP_NAME;
+		global $SLT_APP_NAME, $SLT_DEBUG;
+		if($SLT_DEBUG == 'off'){
+			return false;
+		}
 		Maker::unsetMigration([NULL, 'Users'], $this -> p2m . 'migrations/');
 		$settings_file = $SLT_APP_NAME . '/auth.settings.php';
 

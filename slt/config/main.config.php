@@ -11,8 +11,8 @@ return [
             'LogStorageLifeInDays' => 5
         ],
         'migration' => 'on',
-        'debug' => 'off',
-        'cache' => 'on',
+        'debug' => 'on',
+        'cache' => 'off',
         'model' => [
             'returning' => 'inobject' // or inarray
         ]

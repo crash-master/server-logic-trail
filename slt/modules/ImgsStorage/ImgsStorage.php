@@ -1,0 +1,31 @@
+<?php
+
+namespace Modules;
+
+use Kernel\Module;
+use Kernel\Maker;
+
+class ImgsStorage{
+	public $path_to_tmp = 'tmp/imgs_storage/';
+	public $p2m;
+	public $img_sizes = [];
+
+	public function __construct(){
+		$this -> p2m = Module::pathToModule('ImgsStorage');
+		$this -> img_sizes = ['xl' => 1920, 'lg' => 1200, 'md' => 768, 'sm' => 320, 'xs' => 150];
+		include_once($this -> p2m . 'imgs.storage.routes.map.php');
+	}
+
+	public function install(){
+		Maker::setMigration([NULL, 'ImgsStorage'], $this -> p2m . 'Migrations/');
+		Maker::setMigration([NULL, 'ImgsB64'], $this -> p2m . 'Migrations/');
+		if(!file_exists($this -> path_to_tmp)){
+			mkdir($this -> path_to_tmp);
+		}
+	}
+
+	public function uninstall(){
+		Maker::unsetMigration([NULL, 'ImgsStorage'], $this -> p2m . 'Migrations/');
+		Maker::unsetMigration([NULL, 'ImgsB64'], $this -> p2m . 'Migrations/');
+	}
+}

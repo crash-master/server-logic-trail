@@ -58,7 +58,17 @@ class EssenceDataWrap{
 		if(isset($this -> entry['id'])){
 			unset($this -> entry['id']);
 		}
-		return $this -> model -> set($this -> entry);
+		$result = $this -> model -> set($this -> entry);
+		if(!$result){
+			$last_added = $this -> model -> one() -> get([
+				'rows' => ['id'],
+				'order' => ['id', 'DESC'],
+				'limit' => [0, 1]
+			]);
+			$this -> entry['id'] = $last_added -> id;
+		}
+
+		return $result;
 	}
 
 	public function remove(){

@@ -20,6 +20,14 @@ class Model{
 		if(!isset(self::$instance[$classname])){
 			self::$config = \Kernel\Config::get() -> system -> model;
 			self::$instance[$classname] = new $classname();
+
+			if(!method_exists(self::$instance[$classname], 'default_cols')){
+				throw new \Exception('Not found important method "default_cols" in class ' . $classname);
+			}
+
+			if(!property_exists(self::$instance[$classname], 'table')){
+				throw new \Exception('Not found important property "table" in class ' . $classname);
+			}
 		}
 
 		return self::$instance[$classname];

@@ -6,5 +6,6 @@ return [
     'Sysinfo',
     //'ViewMaster',
     //'AjaxHelper',
-    //'UniOption'
+    //'UniOption',
+    'ImgsStorage'
 ];
