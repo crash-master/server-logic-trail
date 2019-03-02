@@ -6,8 +6,7 @@ use Kernel\{
 
 class UniOptionMigration extends \Extensions\Migration{
 
-    public static function up(){
-
+    public function up(){
         DBW::create('UniOption', function($t){
             $t -> varchar('name')
             -> longtext('value')
@@ -16,13 +15,12 @@ class UniOptionMigration extends \Extensions\Migration{
             -> timestamp('date_of_update')
             -> timestamp('date_of_create');
         });
-
+        return true;
     }
 
-    public static function down(){
-
+    public function down(){
         DBW::drop('UniOption');
-
+        return true;
     }
 
 }

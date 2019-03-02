@@ -6,7 +6,7 @@ use Modules\Auth;
 use Kernel\DBIO;
 use Kernel\Request;
 
-class AuthController{
+class AuthController extends \Extensions\Controller{
 
 	public function install(){
 		global $SLT_DEBUG;

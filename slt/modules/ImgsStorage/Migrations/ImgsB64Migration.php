@@ -6,7 +6,7 @@ use Kernel\{
 
 class ImgsB64Migration extends \Extensions\Migration{
 
-	public static function up(){
+	public function up(){
 		// Create tables in db
 		DBW::create('ImgsB64',function($t){
 			$t -> longtext('xs')
@@ -17,11 +17,13 @@ class ImgsB64Migration extends \Extensions\Migration{
 			-> timestamp('date_of_update')
 			-> timestamp('date_of_create');
 		});
+		return true;
 	}
 
-	public static function down(){
+	public function down(){
 		// Drop tables from db
 		DBW::drop('ImgsB64');
+		return true;
 	}
 
 }

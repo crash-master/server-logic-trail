@@ -4,9 +4,9 @@ namespace Extensions;
 
 class Migration{
     
-    public static function up(){}
+    public function up(){}
 
-    public static function down(){}
+    public function down(){}
     
 }
 

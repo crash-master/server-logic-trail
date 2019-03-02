@@ -27,7 +27,7 @@ class CodeTemplate{
             if(file_put_contents($resPath, $file)){
                 return true;
             }
-            throw new Exception("Template '{$resPath}' is not generated");
+            throw new \Exception("Template '{$resPath}' is not generated");
         }catch(Exception $e){
             exception($e);
         }

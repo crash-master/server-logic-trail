@@ -15,7 +15,7 @@ use Kernel\{
 	Maker
 };
 
-class ComController{
+class ComController extends \Extensions\Controller{
 
 	public function dashboard(){
 		return view(Module::pathToModule('com').'view/dashboard', [
@@ -66,56 +66,54 @@ class ComController{
 	}
 
 	public function migrationRefreshAll(){
-	   return $this -> migrationUpAll();
+	   return Maker::migration_refresh_all();
 	}
 
 	public function migrationRefresh($name){
-		$res = $this -> migrationDown($name);
-		if($res == 'TRUE'){
-			$res = $this -> migrationUp($name);
-		}
+		$res = Maker::migration_refresh($name);
 
 		return $res;
 	}
 	
 	public function migrationUpAll(){
 		if(Config::get('system -> migration') == 'on'){
-			if(Maker::refreshMigration())
+			if(Maker::migration_up_all(null, true))
 				return 'TRUE';
 		}
 
-		throw new Exception('Migrations is off in config');
+		throw new \Exception('Migrations is off in config');
 		return 'FALSE';
 		
 	}
 	
 	public function migrationDownAll(){
 		if(Config::get('system -> migration') == 'on'){
-			if(Maker::unsetAllMigration())
+			if(Maker::migration_down_all())
 				return 'TRUE';
 		}
 
-		throw new Exception('Migrations is off in config');
+		throw new \Exception('Migrations is off in config');
 		return 'FALSE';
 
 	}
 	
 	public function migrationDown($name){
 		if(Config::get('system -> migration') == 'on'){
-			if(Maker::unsetMigration([NULL, $name])){
+			if(Maker::migration_down($name)){
 				return 'TRUE';
+			}else{
+				throw new \Exception("Migration {$name} was not unset");
 			}
 		}
 
-		throw new Exception('Migrations is off in config');
-		throw new Exception("Migration {$name} was not unset");
+		throw new \Exception('Migrations is off in config');
 		
 		return 'TRUE';
 	}
 	
 	public function migrationUp($name){
-		if(!Maker::setMigration([NULL, $name])){
-			throw new Exception('ERR Com',"Migration {$name} was not unset");
+		if(!Maker::migration_up($name, null, true)){
+			throw new \Exception("Migration {$name} was not unset");
 			return 'FALSE';
 		}
 
@@ -123,7 +121,7 @@ class ComController{
 	}
 
 	public function getMigrationList_component(){
-		$migs = Maker::getMigrationList();
+		$migs = Maker::migrations_list();
 
 		return [
 			'migrations' => $migs

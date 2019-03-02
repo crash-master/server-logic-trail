@@ -4,7 +4,7 @@ use Kernel\DBW;
 
 class UsersMigration extends \Extensions\Migration{
 
-	public static function up(){
+	public function up(){
 		// Create tables in db
 		DBW::create('Users', function($t){
 			$t -> varchar('name', 100)
@@ -24,11 +24,15 @@ class UsersMigration extends \Extensions\Migration{
 			-> timestamp('date_of_update')
 			-> timestamp('date_of_create');
 		});
+
+		return true;
 	}
 
-	public static function down(){
+	public function down(){
 		// Drop tables from db
 		DBW::drop('Users');
+
+		return true;
 	}
 
 }

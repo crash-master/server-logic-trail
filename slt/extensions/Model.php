@@ -128,7 +128,6 @@ class Model extends \Kernel\Services\SingletonPattern{
 			$s = '=';
 		}
 
-		// $params[1] = is_null($params[1]) ? self::$config -> returning : $params[1];
 		return $this -> get([$methname, $s, $params[0]], $params[1]);
 	}
 

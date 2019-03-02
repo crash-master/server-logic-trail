@@ -1,127 +1,110 @@
 <?php
+
 namespace Kernel;
 
+use \Kernel\Services\RecursiveScan;
+
 class Maker{
-	public static $params;
-
-	public static function setMigration($params = NULL, $custom_path = false){
+	private static function get_default_path_to_migration_dir(){
 		global $SLT_APP_NAME;
-		try{
-			if(Config::get('system -> migration') != "on"){
-				throw new Exception('Migration set to off in slt/config/main.config.php');
-				return false;
-			}
-		}catch(Exception $e){
-			exception($e);
-		}
-
-		if(is_null($params)){
-			$params = self::$params;
-		}
-
-		$path_to_migration_file = !$custom_path ? $SLT_APP_NAME . '/migrations/'.$params[1].'Migration.php' : $custom_path.$params[1].'Migration.php';
-
-		if(!file_exists($path_to_migration_file)){
-			return false;
-		}
-		@include_once($path_to_migration_file);
-		@call_user_func(array($params[1].'Migration','up'));
-		
-		CodeTemplate::create('model', ['modelname' => $params[1], 'tablename' => $params[1], 'filename' => $params[1]]);
-		return true;
+		return $SLT_APP_NAME . '/migrations';
 	}
 
-	public static function setAllMigration(){
-		$arr = self::getMigrationList();
-		$count = count($arr);
-		for($i=0;$i<$count;$i++){
-			self::setMigration(array(1=>$arr[$i]['name']));
-		}
-
-		return true;
+	private static function get_path_to_migration_file($migration_class, $path_to_migration_dir){
+		$path_to_migration_dir = is_null($path_to_migration_dir) ? self::get_default_path_to_migration_dir() : $path_to_migration_dir;
+		$path_to_migration_dir = ($path_to_migration_dir[strlen($path_to_migration_dir) - 1] != '/') ? $path_to_migration_dir . '/' : $path_to_migration_dir;
+		return $path_to_migration_dir . $migration_class . '.php';
 	}
 
-	public static function unsetMigration($params = NULL, $custom_path = false){
+	public static function migration_exists($migration_name, $path_to_migration_dir = null){
+		$migration_class = $migration_name . 'Migration';
+
+		$migration_file = self::get_path_to_migration_file($migration_class, $path_to_migration_dir);
+
+		if(!file_exists($migration_file)){
+			throw new \Exception("File '{$migration_file}' does not exists");
+		}
+	}
+
+	private static function migration($migration_method, $migration_name, $path_to_migration_dir = null, $with_model = false){
+		if(Config::get() -> system -> migration != "on"){
+			throw new \Exception('Migration set to off in slt/config/main.config.php');
+		}
+
 		global $SLT_APP_NAME;
-		try{
-			if(Config::get('system -> migration') != "on"){
-				throw new Exception('Migration set to off in slt/config/main.config.php');
-				return false;
+
+		$migration_class = $migration_name . 'Migration';
+
+		$migration_file = self::get_path_to_migration_file($migration_class, $path_to_migration_dir);
+
+		if(!file_exists($migration_file)){
+			throw new \Exception("File '{$migration_file}' does not exists");
+		}
+
+		if(!class_exists($migration_class)){
+			include_once($migration_class);
+		}
+
+		if($with_model and $migration_method == 'up'){
+			CodeTemplate::create('model', ['filename' => $migration_name, 'modelname' => $migration_name, 'tablename' => $migration_name], false, $SLT_APP_NAME . '/models/');
+		}elseif($with_model and $migration_method == 'down'){
+			$path_to_model = $SLT_APP_NAME . '/models/' . $migration_name . '.php';
+			$path_to_model_remove = $SLT_APP_NAME . '/models/.removed.' . $migration_name . '.php';
+			if(file_exists($path_to_model)){
+				rename($path_to_model, $path_to_model_remove);
 			}
-		}catch(Exception $e){
-			exception($e);
 		}
 
-		if(is_null($params)){
-			$params = self::$params;
+		return (new $migration_class()) -> $migration_method();
+	}
+
+	public static function migration_up($migration_name, $path_to_migration_dir = null, $with_model = false){
+		return self::migration('up', $migration_name, $path_to_migration_dir, $with_model);
+	}
+
+	public static function migration_down($migration_name, $path_to_migration_dir = null, $with_model = false){
+		return self::migration('down', $migration_name, $path_to_migration_dir, $with_model);
+	}
+
+	public static function migration_refresh($migration_name, $path_to_migration_dir = null, $with_model = false){
+		return self::migration_down($migration_name, $path_to_migration_dir, $with_model) and 
+			self::migration_up($migration_name, $path_to_migration_dir, $with_model);
+	}
+
+	private static function migration_all($migration_method, $path_to_migration_dir = null, $with_models = false){
+		$migrations = self::migrations_list($path_to_migration_dir);
+		foreach($migrations as $migration){
+			self::migration($migration_method, $migration['name'], $path_to_migration_dir, $with_model);
 		}
-
-		$path_to_migration_file = !$custom_path ? $SLT_APP_NAME . '/migrations/'.$params[1].'Migration.php' : $custom_path.$params[1].'Migration.php';
-
-		if(!file_exists($path_to_migration_file)){
-			return false;
-		}
-
-		@include_once($path_to_migration_file);
-		@call_user_func(array($params[1].'Migration','down'));
 
 		return true;
 	}
 
-	public static function unsetAllMigration(){
-		$arr = self::getMigrationList();
-		$count = count($arr);
-		for($i=0;$i<$count;$i++){
-			if(self::issetTable($arr[$i]['name'])){
-				self::unsetMigration(array(1=>$arr[$i]['name']));
+	public static function migration_up_all($path_to_migration_dir = null, $with_models = false){
+		return self::migration_all('up', $path_to_migration_dir, $with_model);
+	}
+
+	public static function migration_down_all($path_to_migration_dir = null, $with_models = false){
+		return self::migration_all('down', $path_to_migration_dir, $with_model);
+	}
+
+	public static function migration_refresh_all($path_to_migration_dir = null, $with_models = false){
+		return self::migration_down_all($path_to_migration_dir, $with_model) and self::migration_up_all($path_to_migration_dir, $with_model);
+	}
+
+	public static function migrations_list($path_to_migration_dir = null){
+		$rs = new RecursiveScan();
+		$path_to_migration_dir = is_null($path_to_migration_dir) ? self::get_default_path_to_migration_dir() : $path_to_migration_dir;
+		$migrations = $rs -> get_files($path_to_migration_dir, false);
+		$ret = [];
+		foreach($migrations as $inx => $migration){
+			if(strpos($migration, 'Migration.php') === false){
+				continue;
 			}
+			list($migration_name) = explode('Migration.php', basename($migration));
+			$ret[] = ['name' => $migration_name, 'path' => $migration];
 		}
-		return true;
+
+		return $ret;
 	}
-
-	public static function refreshMigration(){
-		if(self::unsetAllMigration() and self::setAllMigration()){
-			return true;
-		}
-		return false;
-	}
-
-	private static function issetTable($tablename){
-		$tables = DBIO::getTableList();
-		$count = count($tables);
-		for($i=0;$i<$count;$i++){
-			if($tablename == $tables[$i]){
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public static function getMigrationList(){
-		global $SLT_APP_NAME;
-		$list = IncludeControll::scan('./' . $SLT_APP_NAME . '/migrations/');
-		
-		$count = count($list);
-		$res = [];
-		for($i=0;$i<$count;$i++){
-			list($name) = explode('Migration', basename($list[$i]));
-			$res[] = ['name' => $name, 'path' => $list[$i]];
-		}
-
-		return $res;
-	}
-
-	private static function getPathToMigrationFileOnName($name){
-		$migrations = self::getMigrationList();
-		$count = count($migrations);
-		for($i=0;$i<$count;$i++){
-			if($migrations[$i]['name'] == $name){
-				return $migrations[$i]['path'];
-			}
-		}
-
-		return false;
-	}   
-
 }

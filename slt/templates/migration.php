@@ -11,11 +11,15 @@ class /*$name*/Migration extends \Extensions\Migration{
             $t -> timestamp('date_of_update')
             -> timestamp('date_of_create');
         });
+
+        return true;
     }
 
     public static function down(){
         // Drop tables from db
         DBW::drop('/*$name*/');
+
+        return true;
     }
 
 }
