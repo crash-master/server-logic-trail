@@ -5,7 +5,7 @@ namespace Modules\Auth\Models;
 use Kernel\Sess;
 use Kernel\Events;
 
-class Users extends \Extend\Model{
+class Users extends \Extensions\Model{
 	public $table = 'Users';
 
 	public $auth_module;

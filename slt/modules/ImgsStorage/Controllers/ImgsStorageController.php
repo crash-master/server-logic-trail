@@ -10,7 +10,7 @@ use Kernel\{
 use Modules\ImgsStorage\Models\ImgsStorage;
 use Modules\ImgsStorage\Models\ImgsB64;
 
-class ImgsStorageController extends \Extend\Controller{
+class ImgsStorageController extends \Extensions\Controller{
 
 	public function binary_image($id, $size){
 		$ready_img = ImgsB64::ins() -> get_binary($id, $size);

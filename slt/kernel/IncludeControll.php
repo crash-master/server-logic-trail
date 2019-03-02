@@ -36,7 +36,7 @@ class IncludeControll{
 		$rs = new RecursiveScan;
 		$files = array_merge(
 			$rs -> get_files('./slt/kernel'),
-			$rs -> get_files('./slt/extend')
+			$rs -> get_files('./slt/extensions')
 		);
 
 		return self::inc($files);

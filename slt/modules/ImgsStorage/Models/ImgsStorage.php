@@ -5,7 +5,7 @@ namespace Modules\ImgsStorage\Models;
 use Modules\ImgsStorage\Models\ImgsB64;
 use Kernel\Services\EssenceDataWrap;
 
-class ImgsStorage extends \Extend\Model{
+class ImgsStorage extends \Extensions\Model{
 
 	use ImgsStorageTrait;
 

@@ -2,7 +2,7 @@
 
 namespace Modules\UniOption\Models;
 
-class UniOption extends \Extend\Model{
+class UniOption extends \Extensions\Model{
 
 	private $session_cache = [];
 

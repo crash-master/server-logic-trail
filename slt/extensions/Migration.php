@@ -1,6 +1,6 @@
 <?php
 
-namespace Extend;
+namespace Extensions;
 
 class Migration{
     
@@ -10,4 +10,3 @@ class Migration{
     
 }
 
-?>

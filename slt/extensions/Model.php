@@ -1,6 +1,6 @@
 <?php
 
-namespace Extend;
+namespace Extensions;
 use Kernel\{
 	DBIO,
 	Essence,
@@ -9,29 +9,15 @@ use Kernel\{
 
 use Kernel\Services\EssenceDataWrap;
 
-class Model{
+class Model extends \Kernel\Services\SingletonPattern{
 
-	private static $instance = [];
 	private static $config;
 	private static $tmp_one_flag = false;
 
-	public static function ins(){
-		$classname = get_called_class();
-		if(!isset(self::$instance[$classname])){
-			self::$config = \Kernel\Config::get() -> system -> model;
-			self::$instance[$classname] = new $classname();
-
-			if(!method_exists(self::$instance[$classname], 'default_cols')){
-				throw new \Exception('Not found important method "default_cols" in class ' . $classname);
-			}
-
-			if(!property_exists(self::$instance[$classname], 'table')){
-				throw new \Exception('Not found important property "table" in class ' . $classname);
-			}
-		}
-
-		return self::$instance[$classname];
+	public function __construct(){
+		self::$config = \Kernel\Config::get() -> system -> model;
 	}
+
 
 	public function q($sql){
 		return DBIO::fq($sql);
@@ -39,12 +25,12 @@ class Model{
 
 	private function returned_data($data, $one = true, $returning_entity = null){
 		global $SLT_INARR, $SLT_INOBJ;
-		$returning_entity = !is_null($returning_entity) ?: self::$config -> returning;
+		$returning_entity = !is_null($returning_entity) ? $returning_entity : self::$config -> returning;
 		if($returning_entity == $SLT_INARR){
 			return $data;
 		}
-
 		if($one or self::$tmp_one_flag){
+			self::$tmp_one_flag = false;
 			return new EssenceDataWrap($data, $this);
 		}
 
@@ -135,11 +121,14 @@ class Model{
 	}
 
 	public function __call($methname, $params){
+		global $SLT_INOBJ;
 		if(is_array($params[0])){
 			$s = 'IN';
 		}else{
 			$s = '=';
 		}
+
+		// $params[1] = is_null($params[1]) ? self::$config -> returning : $params[1];
 		return $this -> get([$methname, $s, $params[0]], $params[1]);
 	}
 

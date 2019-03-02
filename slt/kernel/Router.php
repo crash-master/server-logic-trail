@@ -186,6 +186,7 @@ class Router{
 	}
 	
 	public static function call($classname, $methname){   
+		$object = \call_user_func([$classname, 'ins']);
 		$reflectionMethod = new \ReflectionMethod($classname, $methname);
 		$methParams = $reflectionMethod -> getParameters();
 		$params = [];
@@ -205,7 +206,8 @@ class Router{
 			'method' => 'get'
 		]);
 
-		return $reflectionMethod -> invokeArgs(new $classname(), $params);
+
+		return \call_user_func_array([$object, $methname], $params);
 	}
 	
 	public static function callFunc($funcname){

@@ -4,7 +4,7 @@ use Kernel\{
 	DBW
 };
 
-class ImgsStorageMigration extends \Extend\Migration{
+class ImgsStorageMigration extends \Extensions\Migration{
 
 	public static function up(){
 		// Create tables in db

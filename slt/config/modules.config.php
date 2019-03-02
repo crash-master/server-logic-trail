@@ -4,7 +4,7 @@ return [
     'Com',
     'Auth',
     'Sysinfo',
-    //'ViewMaster',
+    'ViewMaster',
     //'AjaxHelper',
     //'UniOption',
     'ImgsStorage'

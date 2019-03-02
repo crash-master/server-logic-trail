@@ -169,6 +169,8 @@ class Components{
 	 * @return [string] [layout html code]
 	 */
 	public static function call($controller, $action, $args){   
+		$instance = "\\" . $controller . '::ins';
+		$class_controller = call_user_func($instance);
         $reflectionMethod = new \ReflectionMethod($controller, $action);
         $methParams = $reflectionMethod -> getParameters();
         $params = [];
@@ -179,8 +181,8 @@ class Components{
                 $params[] = $args[$methParams[$i] -> name];
             }
         }
-
-        return $reflectionMethod -> invokeArgs(new $controller(), $params);
+        // return $reflectionMethod -> invokeArgs($class_controller, $params);
+        return \call_user_func_array([$class_controller, $action], $params);
     }
 
 }

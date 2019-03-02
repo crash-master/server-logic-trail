@@ -2,7 +2,7 @@
 
 /*  /models/ */
 
-class ImgsB64 extends \Extend\Model{
+class ImgsB64 extends \Extensions\Model{
 
     public $table = "ImgsB64";
 

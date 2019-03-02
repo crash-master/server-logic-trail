@@ -3,7 +3,7 @@
 /*  /migrations/ */
 use Kernel\DBW;
 
-class Articles_HashtagsMigration extends \Extend\Migration{
+class Articles_HashtagsMigration extends \Extensions\Migration{
 
     public static function up(){
         // Create tables in db

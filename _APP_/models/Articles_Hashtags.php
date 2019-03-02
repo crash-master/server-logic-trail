@@ -2,7 +2,7 @@
 
 /*  /models/ */
 
-class Articles_Hashtags extends \Extend\Model{
+class Articles_Hashtags extends \Extensions\Model{
 
     public $table = "Articles_Hashtags";
 

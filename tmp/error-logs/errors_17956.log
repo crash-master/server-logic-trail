@@ -1,0 +1,64 @@
+[2019-03-01 18:17:59] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:17:59] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:17:59] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:18:31] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:18:31] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:18:31] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:18:32] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:19:39] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:19:39] E_WARNING (code 2) | call_user_func_array() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:19:39] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:19:41] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:19:41] E_WARNING (code 2) | call_user_func_array() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:19:41] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:19:41] E_WARNING (code 2) | call_user_func() expects parameter 1 to be a valid callback, class '\TestControllerController' not found IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 173
+-------------------------------------------------
+[2019-03-01 18:19:41] E_WARNING (code 2) | call_user_func_array() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Components.php IN LINE 185
+-------------------------------------------------
+[2019-03-01 18:19:41] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\View.php IN LINE 101
+==================================================================================================
+[2019-03-01 18:20:39] E_WARNING (code 2) | call_user_func_array() expects parameter 1 to be a valid callback, first array member is not a valid class name or object IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Router.php IN LINE 210
+==================================================================================================
+[2019-03-01 18:20:52] E_WARNING (code 2) | call_user_func_array() expects parameter 1 to be a valid callback, second array member is not a valid method IN FILE G:\server\OSPanel\domains\slt.local\slt\kernel\Router.php IN LINE 210
+==================================================================================================

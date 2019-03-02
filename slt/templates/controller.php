@@ -6,6 +6,6 @@ use Kernel\{
 	Model
 };
 
-class /*$name*/Controller extends \Extend\Controller{
+class /*$name*/Controller extends \Extensions\Controller{
      
 }

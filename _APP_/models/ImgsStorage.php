@@ -2,7 +2,7 @@
 
 /*  /models/ */
 
-class ImgsStorage extends \Extend\Model{
+class ImgsStorage extends \Extensions\Model{
 
     public $table = "ImgsStorage";
 

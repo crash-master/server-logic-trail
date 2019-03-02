@@ -1,7 +1,12 @@
 <?php
 
-class ExampleController{
+class ExampleController extends \Extensions\Controller{
 	public function articles(){
-		return Articles::ins() -> one() -> id(2) -> with_hashtags() -> to_array();
+		$article = Articles::ins() -> one() -> id(1) -> with_hashtags();
+		return $article -> hashtags[0] -> to_array();
+	}
+
+	public function simple(){
+		return Articles::ins() -> get(['id', '=', 1]);
 	}
 }

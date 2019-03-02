@@ -4,7 +4,7 @@ use Kernel\{
 	DBW
 };
 
-class ImgsB64Migration extends \Extend\Migration{
+class ImgsB64Migration extends \Extensions\Migration{
 
 	public static function up(){
 		// Create tables in db

@@ -1,41 +1,29 @@
 <?php
 
 namespace Kernel\Services;
-use Kernel\ExceptionHandler;
 
-class EssenceDataWrap{
-	private $entry;
-	private $fields;
+class EssenceDataWrap extends ArrayLikeObject{
 	private $model;
 
 	public function __construct($entry, $model){
-		$this -> entry = $entry;
-		$this -> fields = array_keys($entry);
+		parent::__construct($entry);
 		$this -> model = $model;
-	}
-
-	public function to_array(){
-		return $this -> entry;
-	}
-
-	public function __get($field){
-		return $this -> entry[$field];
 	}
 
 	public function __set($field, $value){
 		if($field == 'id'){
 			throw new \Exception("Field id is protected", 1);
 		}
-		$this -> entry[$field] = $value;
+		parent::__set($field, $value);
 	}
 
 	public function __toString(){
-		if(isset($this -> entry['id'])){
-			return $this -> entry['id'];
+		if(isset($this -> arr['id'])){
+			return $this -> arr['id'];
 		}
 
-		if(is_array($this -> entry)){
-			return $this -> entry[$this -> fields[0]];
+		if(is_array($this -> arr)){
+			return $this -> arr[$this -> fields[0]];
 		}
 
 		return 'Empty object';
@@ -51,41 +39,31 @@ class EssenceDataWrap{
 	}
 
 	public function update(){
-		return $this -> model -> update($this -> entry, ['id', '=', $this -> entry['id']]);
+		return $this -> model -> update($this -> arr, ['id', '=', $this -> arr['id']]);
 	}
 
 	public function set(){
-		if(isset($this -> entry['id'])){
-			unset($this -> entry['id']);
+		if(isset($this -> arr['id'])){
+			unset($this -> arr['id']);
 		}
-		$result = $this -> model -> set($this -> entry);
+		$result = $this -> model -> set($this -> arr);
 		if(!$result){
 			$last_added = $this -> model -> one() -> get([
 				'rows' => ['id'],
 				'order' => ['id', 'DESC'],
 				'limit' => [0, 1]
 			]);
-			$this -> entry['id'] = $last_added -> id;
+			$this -> arr['id'] = $last_added -> id;
 		}
 
 		return $result;
 	}
 
 	public function remove(){
-		if(!isset($this -> entry['id'])){
+		if(!isset($this -> arr['id'])){
 			return false;
 		}
-		return $this -> model -> remove(['id', '=', $this -> entry['id']]);
+		return $this -> model -> remove(['id', '=', $this -> arr['id']]);
 	}
 
-	public function simplify(){
-		$new_entry = [];
-		foreach($this -> entry as $entry_item){
-			foreach($entry_item as $i => $value){
-				$new_entry[] = $value;
-			}
-		}
-		$this -> entry = $new_entry;
-		return $this;
-	}
 }

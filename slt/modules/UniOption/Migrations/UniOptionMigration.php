@@ -4,7 +4,7 @@ use Kernel\{
     DBW
 };
 
-class UniOptionMigration extends \Extend\Migration{
+class UniOptionMigration extends \Extensions\Migration{
 
     public static function up(){
 

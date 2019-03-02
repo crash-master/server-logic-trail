@@ -2,7 +2,7 @@
 
 /*  /models/ */
 
-class Users extends \Extend\Model{
+class Users extends \Extensions\Model{
 
     public $table = "Users";
 

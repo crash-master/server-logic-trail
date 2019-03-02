@@ -6,7 +6,7 @@ use Modules\ImgsStorage\Libs\ImageResize;
 use Modules\ImgsStorage\Models\ImgsStorage;
 use Kernel\Services\EssenceDataWrap;
 
-class ImgsB64 extends \Extend\Model{
+class ImgsB64 extends \Extensions\Model{
 	public $table = "ImgsB64";
 
 	private $size = [];

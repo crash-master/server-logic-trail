@@ -2,7 +2,7 @@
 
 use Kernel\DBW;
 
-class UsersMigration extends \Extend\Migration{
+class UsersMigration extends \Extensions\Migration{
 
 	public static function up(){
 		// Create tables in db

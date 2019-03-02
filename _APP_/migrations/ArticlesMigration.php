@@ -3,7 +3,7 @@
 /*  /migrations/ */
 use Kernel\DBW;
 
-class ArticlesMigration extends \Extend\Migration{
+class ArticlesMigration extends \Extensions\Migration{
 
     public static function up(){
         // Create tables in db
