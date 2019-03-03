@@ -54,7 +54,7 @@ class Users extends \Extensions\Model{
 
 		$user['password'] = sha1($user['password']);
 
-		$user_card = $this -> get([$this -> auth_module -> signin_field_name, '=', $user[$this -> auth_module -> signin_field_name]], $SLT_INARR);
+		$user_card = $this -> one() -> get([$this -> auth_module -> signin_field_name, '=', $user[$this -> auth_module -> signin_field_name]], $SLT_INARR);
 		if(!$user_card){
 			return 4;
 		}
@@ -70,7 +70,7 @@ class Users extends \Extensions\Model{
 	}
 
 	public function get_user($user_id){
-		return $this -> get(['id', '=', $user_id], $SLT_INARR);
+		return $this -> one() -> id($user_id, $SLT_INARR);
 	}
 
 	public function confirm($user_id){

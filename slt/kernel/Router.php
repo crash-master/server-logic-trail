@@ -186,50 +186,24 @@ class Router{
 	}
 	
 	public static function call($classname, $methname){   
-		$object = \call_user_func([$classname, 'ins']);
-		$reflectionMethod = new \ReflectionMethod($classname, $methname);
-		$methParams = $reflectionMethod -> getParameters();
-		$params = [];
-		$count = count($methParams);
-		$data = self::$request_args;
-
-		for($i=0;$i<$count;$i++){
-			if(isset($data[$methParams[$i] -> name])){
-				$params[] = $data[$methParams[$i] -> name];
-			}
-		}
-		
-		Events::register('call_action', [
-			'controller' => $classname,
-			'action' => $methname,
-			'params' => is_array($params) ? $params : NULL,
-			'method' => 'get'
-		]);
-
-
-		return \call_user_func_array([$object, $methname], $params);
+		return Door::knock_to_class($classname, $methname, self::$request_args, function($class_name, $meth_name, $params){
+			Events::register('call_action', [
+				'controller' => $classname,
+				'action' => $methname,
+				'params' => is_array($params) ? $params : NULL,
+				'method' => 'get'
+			]);
+		});
 	}
 	
 	public static function callFunc($funcname){
-		$reflectionFunction = new \ReflectionFunction($funcname);
-		$funcParams = $reflectionFunction -> getParameters();
-		$params = [];
-		$count = count($funcParams);
-		$data = self::$request_args;
-
-		for($i=0;$i<$count;$i++){
-			if(isset($data[$funcParams[$i] -> name])){
-				$params[] = $data[$funcParams[$i] -> name];
-			}
-		}
-		
-		Events::register('call_action', [
-			'action' => $funcname,
-			'params' => count($params) ? $params : NULL,
-			'method' => 'get'
-		]);
-		return $reflectionFunction -> invokeArgs($params);
-
+		return Door::knock_to_func($funcname, self::$request_args, function($func, $params){
+			Events::register('call_action', [
+				'action' => $funcname,
+				'params' => count($params) ? $params : NULL,
+				'method' => 'get'
+			]);
+		});
 	}
 
 	public static function eventsPost($view){
@@ -249,25 +223,28 @@ class Router{
 							'method' => 'post'
 						]);
 						
-						$view($func['action']());
+						$view(Door::knock_to_func($func['action'], []));
 						self::$post_flag = true;
 					}else{
-						$arr = explode('@',$func['action']);
+						list($controller, $action) = explode('@', $func['action']);
 						
 						Events::register('call_action', [
-							'controller' => $arr[0],
-							'action' => $arr[1],
+							'controller' => $controller,
+							'action' => $action,
 							'params' => $data,
 							'method' => 'post'
 						]);
 
-						$res = self::call($arr[0],$arr[1]);
+						$res = Door::knock_to_func($controller, $action, $data);
+
 						Events::register('worked_action', [
-							'controller' => $arr[0],
-							'action' => $arr[1],
+							'controller' => $controller,
+							'action' => $action,
 							'result' => $res
 						]);
+
 						$view($res);
+
 						self::$post_flag = true;
 					}
 				}

@@ -119,7 +119,7 @@ class Auth{
 		if($SLT_DEBUG == 'off'){
 			return false;
 		}
-		Maker::setMigration([NULL, 'Users'], $this -> p2m . 'migrations/');
+		Maker::migration_up('Users', $this -> p2m . 'migrations/');
 		$settings_file = $SLT_APP_NAME . '/auth.settings.php';
 		if(!file_exists($settings_file)){
 			CodeTemplate::create('auth.settings', ['filename' => 'auth.settings'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/');
@@ -150,7 +150,7 @@ class Auth{
 		if($SLT_DEBUG == 'off'){
 			return false;
 		}
-		Maker::unsetMigration([NULL, 'Users'], $this -> p2m . 'migrations/');
+		Maker::migration_down('Users', $this -> p2m . 'migrations/');
 		$settings_file = $SLT_APP_NAME . '/auth.settings.php';
 
 		return true;

@@ -27,6 +27,6 @@ class UniOption{
 	}
 
 	public function set_migration(){
-		Maker::setMigration([null, 'UniOption'], $this -> p2m . '/Migrations/');
+		Maker::migration_up('UniOption', $this -> p2m . '/Migrations/');
 	}
 }

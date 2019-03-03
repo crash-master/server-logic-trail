@@ -17,15 +17,15 @@ class ImgsStorage{
 	}
 
 	public function install(){
-		Maker::setMigration([NULL, 'ImgsStorage'], $this -> p2m . 'Migrations/');
-		Maker::setMigration([NULL, 'ImgsB64'], $this -> p2m . 'Migrations/');
+		Maker::migration_up('ImgsStorage', $this -> p2m . 'Migrations/');
+		Maker::migration_up('ImgsB64', $this -> p2m . 'Migrations/');
 		if(!file_exists($this -> path_to_tmp)){
 			mkdir($this -> path_to_tmp);
 		}
 	}
 
 	public function uninstall(){
-		Maker::unsetMigration([NULL, 'ImgsStorage'], $this -> p2m . 'Migrations/');
-		Maker::unsetMigration([NULL, 'ImgsB64'], $this -> p2m . 'Migrations/');
+		Maker::migration_down('ImgsStorage', $this -> p2m . 'Migrations/');
+		Maker::migration_down('ImgsB64', $this -> p2m . 'Migrations/');
 	}
 }

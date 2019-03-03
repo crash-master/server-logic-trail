@@ -69,24 +69,14 @@ class AjaxHelper{
 		}
 		$data = $arg['data'];
 		list($classname, $methname) = explode('@', $controller);
-		$reflectionMethod = new \ReflectionMethod($classname, $methname);
-		$methParams = $reflectionMethod -> getParameters();
-		$params = [];
-		$count = count($methParams);
 
-		for($i=0;$i<$count;$i++){
-			if(isset($data[$methParams[$i] -> name])){
-				$params[] = $data[$methParams[$i] -> name];
-			}
-		}
-		
-		\Kernel\Events::register('call_action', [
-			'controller' => $classname,
-			'action' => $methname,
-			'params' => is_array($params) ? $params : NULL,
-			'method' => 'ajax'
-		]);
-
-		return $reflectionMethod -> invokeArgs(new $classname(), $params);
+		\Kernel\Door::knock_to_class($classname, $methname, $data, function($class_name, $meth_name, $params){
+			\Kernel\Events::register('call_action', [
+				'controller' => $class_name,
+				'action' => $meth_name,
+				'params' => is_array($params) ? $params : NULL,
+				'method' => 'ajax'
+			]);
+		});
 	}
 }

@@ -11,3 +11,7 @@ use Kernel\Router;
 route_not_found('IndexController@not_found_page');
 route('/', 'IndexController@welcome_page');
 route('ExampleController');
+
+route('/func', function(){
+	return 'Hello';
+});

@@ -42,7 +42,7 @@ class Maker{
 		}
 
 		if(!class_exists($migration_class)){
-			include_once($migration_class);
+			include_once($migration_file);
 		}
 
 		if($with_model and $migration_method == 'up'){

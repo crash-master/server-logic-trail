@@ -136,7 +136,7 @@ class Components{
 			}
 		}
 
-        Events::register('call_component', $component);
+		Events::register('call_component', $component);
 
 		foreach($component as $name => $item){
 			if(!is_array($item[$view])){
@@ -169,20 +169,7 @@ class Components{
 	 * @return [string] [layout html code]
 	 */
 	public static function call($controller, $action, $args){   
-		$instance = "\\" . $controller . '::ins';
-		$class_controller = call_user_func($instance);
-        $reflectionMethod = new \ReflectionMethod($controller, $action);
-        $methParams = $reflectionMethod -> getParameters();
-        $params = [];
-        $count = count($methParams);
-
-        for($i=0;$i<$count;$i++){
-            if(isset($args[$methParams[$i] -> name])){
-                $params[] = $args[$methParams[$i] -> name];
-            }
-        }
-        // return $reflectionMethod -> invokeArgs($class_controller, $params);
-        return \call_user_func_array([$class_controller, $action], $params);
-    }
+		return Door::knock_to_class($controller, $action, $args);
+	}
 
 }
