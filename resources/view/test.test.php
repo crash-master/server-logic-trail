@@ -1,1 +1,0 @@
-This is component with name <?= $name ?>

@@ -78,7 +78,8 @@ class IncludeControll{
 			'./' . $SLT_APP_NAME . '/migrations',
 			'./' . $SLT_APP_NAME . '/middleware',
 			'./' . $SLT_APP_NAME . '/middleware/kernelevents',
-			'./' . $SLT_APP_NAME . '/middleware/modulesevents'
+			'./' . $SLT_APP_NAME . '/middleware/modulesevents',
+			'./' . $SLT_APP_NAME . '/middleware/appevents'
 		);
 
 		$rs = new RecursiveScan;
