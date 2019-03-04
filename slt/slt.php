@@ -4,6 +4,7 @@ namespace Kernel;
 class SLT{
 
 	public function __construct($params){
+		global $SLT_CONSOLE_MOD;
 		header('Access-Control-Allow-Origin: *');
 
 		$this -> init_slt_vars($params);
@@ -49,7 +50,11 @@ class SLT{
 
 		components_map();
 
-		Router::run(Config::get('system -> showFuncName'));
+		if(!$SLT_CONSOLE_MOD){
+			Router::run(Config::get('system -> showFuncName'));
+		}else{
+			Console::routing();
+		}
 
 		if($errHandler -> err_disp)
 			$errHandler -> viewErrs();

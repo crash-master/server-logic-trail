@@ -7,5 +7,6 @@ return [
     // 'ViewMaster',
     //'AjaxHelper',
     //'UniOption',
-    // 'ImgsStorage'
+    // 'ImgsStorage',
+    // 'ConsoleView'
 ];

@@ -54,6 +54,10 @@ class ErrorHandler{
 	 * [__construct of ErrorHandler]
 	 */
 	public function __construct(){
+		global $SLT_CONSOLE_MOD;
+		if($SLT_CONSOLE_MOD)
+			return false;
+
 		$err_disp = Config::get() -> system -> debug;
 		$this -> err_disp = $err_disp;
 		$this -> important_errors = Config::get() -> system -> ErrorHandler -> ImportantErrors;
