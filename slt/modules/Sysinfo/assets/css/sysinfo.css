@@ -1,7 +1,7 @@
 .sysinfo-container{
 	position: fixed;
-	left: -420px;
-	width: 420px;
+	left: -1000px;
+	width: 1000px;
 	background-color: #fff;
 	top: 0;
 	transition-duration: .3s;
@@ -25,6 +25,6 @@
 }
 
 .sysinfo-container.show .show-info{
-	left: 435px;
+	left: 750px;
 }
 

@@ -1,7 +1,8 @@
 <?php
 
-namespace Modules;
-use Kernel\Router;
+namespace Modules\Com;
+use Kernel\Router\Router;
+use Modules\Com\ComController;
 
 $COM_BACKUP_ROUTES;
 

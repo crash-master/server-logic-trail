@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules;
+namespace Modules\Com;
 
 use Kernel\{
 	View,

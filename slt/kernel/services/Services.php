@@ -1,6 +1,6 @@
 <?php
 use Kernel\{
-	Router,
+	Router\Router,
 	Model,
 	Module,
 	View,

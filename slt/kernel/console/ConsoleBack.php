@@ -1,13 +1,15 @@
 <?php
 
-namespace Kernel;
+namespace Kernel\Console;
 
-class Console{
-	private static $routes = [];
-	private static $args_list = [];
-	private static $not_found_action;
+use Kernel\Door;
 
-	private static function make_arguments_list($source_arguments){
+class ConsoleBack{
+	protected static $routes = [];
+	protected static $args_list = [];
+	protected static $not_found_action;
+
+	protected static function make_arguments_list($source_arguments){
 		$args_list = [];
 		$flag = false;
 		$count = count($source_arguments);
@@ -21,11 +23,11 @@ class Console{
 		return $args_list;
 	}
 
-	private static function get_command_name($source_arguments){
+	protected static function get_command_name($source_arguments){
 		return $source_arguments[1];
 	}
 
-	private static function get_args_names_string($arguments_list){
+	protected static function get_args_names_string($arguments_list){
 		$count = count($arguments_list);
 		if($count == 0){
 			return '';
@@ -39,7 +41,7 @@ class Console{
 		return implode(';', $tmp);
 	}
 
-	public static function routing(){
+	protected static function routing(){
 		global $argv;
 		$arguments_list = self::make_arguments_list($argv);
 		$command = self::get_command_name($argv);
@@ -52,17 +54,7 @@ class Console{
 		}
 	}
 
-	public static function route($command, $action){
-		self::$routes[$command] = $action;
-		return true;
-	}
-
-	public static function not_found($action){
-		self::$not_found_action = $action;
-		return true;
-	}
-
-	private static function call($action){
+	protected static function call($action){
 		if(is_object($action)){
 			return Door::knock_to_func($action, self::$args_list);
 		}elseif(is_string($action) and strpos($action, '@') !== false){
@@ -75,28 +67,7 @@ class Console{
 		return null;
 	}
 
-	public static function action($action){
-		if(!is_string($action) or strpos($action, '@') === false){
-			throw new \Exception("Action must be string in format 'class@method'");
-		}
-		list($classname, $methname) = explode('@', $action);
-		if(!class_exists($classname)){
-			IncludeControll::load_one_controller($classname);
-		}
-		$reflection_meth = new \ReflectionMethod($classname, $methname);
-		$params = $reflection_meth -> getParameters();
-		$meth_arguments = [];
-		foreach($params as $param){
-			$meth_arguments[] = '$' . $param -> name;
-		}
-		$meth_arguments_string = implode(';', $meth_arguments);
-
-		$action_name = self::controller_name_formating($classname) . '.' . self::action_name_formating($methname);
-		self::route($action_name . '::' . $meth_arguments_string, $action);
-		return true;
-	}
-
-	private static function controller_name_formating($controller_name){
+	protected static function controller_name_formating($controller_name){
 		if(strpos($controller_name, '\\') !== false){
 			$arr = explode('\\', $controller_name);
 			$controller_name = $arr[count($arr) - 1];
@@ -105,12 +76,8 @@ class Console{
 		return strtolower(preg_replace('/(?<=\\w)(?=[A-Z])/', "-$1", $controller_name));
 	}
 
-	private static function action_name_formating($action_name){
+	protected static function action_name_formating($action_name){
 		$action_name = str_replace(' ', '', ucwords(str_replace('_', ' ', $action_name)));
 		return strtolower(preg_replace('/(?<=\\w)(?=[A-Z])/', "-$1", $action_name));
-	}
-
-	public static function get_routes_map(){
-		return self::$routes;
 	}
 }

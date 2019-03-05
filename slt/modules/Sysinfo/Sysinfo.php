@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules;
+namespace Modules\Sysinfo;
 
 use Kernel\Module;
 use Kernel\Events;

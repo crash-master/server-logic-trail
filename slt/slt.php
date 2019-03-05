@@ -1,6 +1,9 @@
 <?php
 namespace Kernel;
 
+use Kernel\Router\Router;
+use Kernel\Console\Console;
+
 class SLT{
 
 	public function __construct($params){
@@ -10,11 +13,10 @@ class SLT{
 		$this -> init_slt_vars($params);
 		$this -> init_slt_vars(['start_point_time' => microtime(true)]);
 
-		include_once('slt/kernel/IncludeControll.php');
+		include_once('slt/kernel/Boot.php');
 
-		IncludeControll::init();
-		IncludeControll::appRootInit();
-		IncludeControll::loadKernel();
+		Boot::autoloader();
+		Boot::get_all_files();
 
 		Sess::init();
 
@@ -31,9 +33,10 @@ class SLT{
 		];
 		$this -> init_slt_vars($other_global_slt_vars);
 
-        IncludeControll::appRoutesInit();
-		IncludeControll::appAutoLoadInit();
-		IncludeControll::loadModules();
+		Boot::load_always([
+			'./' . $params['app_name'],
+			'./' . $params['app_name'] . '/routes'
+		]);
 
 		events_map();
 

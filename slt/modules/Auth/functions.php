@@ -17,7 +17,7 @@ function auth_redirect($route, $access, $new_route){
 	}elseif(strpos($route, 'Controller')){
 		$classname = $route;
 		if(!class_exists($classname)){
-			\Kernel\IncludeControll::load_one_controller($classname);
+			throw new \Exception("Class {$classname} not exists");
 		}
 		$methods = get_class_methods($classname);
 		foreach($methods as $method){

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules;
+namespace Modules\UniOption;
 
 use \Kernel\Maker;
 use \Kernel\Module;

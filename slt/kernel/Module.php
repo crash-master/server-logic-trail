@@ -16,7 +16,7 @@ class Module{
 		}
 		
 		$classname = $name;
-		$name = '\\Modules\\' . $name;
+		$name = '\\Modules\\' . $name . '\\' . $name;
 		self::$modules[$classname] = new $name();
 	}
 	

@@ -1,5 +1,5 @@
 <?php
-use Kernel\Router;
+use Kernel\Router\Router;
 /*
 *   Router::_404(action_name)
 *   Router::get('route', 'action');

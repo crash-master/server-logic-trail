@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules;
+namespace Modules\ConsoleView;
 use Modules\ConsoleView\Libs\Console_table;
 
 class ConsoleView{

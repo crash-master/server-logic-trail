@@ -9,11 +9,7 @@ class RecursiveScan{
 
 	public function get($start_point, $recursive_flag = true){
 		$this -> recursive($start_point, $recursive_flag);
-		$res = [
-			'dirs' => $this -> merge($this -> dirs),
-			'files' => $this -> merge($this -> files)
-		];
-		return $res;
+		return ['files' => $this -> files, 'dirs' => $this -> dirs];
 	}
 
 	public function get_files($start_point, $recursive_flag = true){
@@ -22,35 +18,30 @@ class RecursiveScan{
 	}
 
 	public function get_dirs($start_point, $recursive_flag = true){
-		$res = $this -> get($start_point, $recursive_flag, false);
+		$res = $this -> get($start_point, $recursive_flag);
 		return $res['dirs'];
 	}
 
 	public function recursive($dir, $recursive_flag = true){
-		$result = $this -> _scan($dir);
-		$this -> dirs[] = $result['dirs'];
-		$this -> files[] = $result['files'];
-
-		if(!$recursive_flag){
+		if(empty($dir) or !is_dir($dir)){
 			return false;
 		}
+		
+		$dir_essence = scandir($dir);
+		foreach($dir_essence as $essence){
+			if($essence == '.' or $essence == '..'){
+				continue;
+			}
 
-		$i = 0;
-		do{
-			$count = count($this -> dirs[$i]);
-			for($j=0; $j<$count; $j++){
-				$result = $this -> _scan($this -> dirs[$i][$j]);
-				if($result['dirs']){
-					$this -> dirs[] = $result['dirs'];
-				}
-				if($result['files']){
-					$this -> files[] = $result['files'];
+			if(strpos($essence, '.') !== false or is_file($essence)){
+				$this -> files[] = $dir . '/' . $essence;
+			}else{
+				$this -> dirs[] = $dir . '/' . $essence;
+				if($recursive_flag){
+					$this -> recursive($dir . '/' . $essence);
 				}
 			}
-			
-			$i++;
-		}while(count($result['dirs']));
-
+		}
 	}
 
 	private function merge($arr){
@@ -60,26 +51,6 @@ class RecursiveScan{
 		}
 
 		return $result;
-	}
-
-	public function _scan($dir){
-		$files = [];
-		$dirs = [];
-		$result = scandir($dir);
-		if(!$result) $result = [];
-		foreach($result as $item){
-			if($item == '.' or $item == '..'){
-				continue;
-			}
-			$essence = $dir . '/' . $item;
-			if(is_file($essence)){
-				$files[] = $essence;
-			}else{
-				$dirs[] = $essence;
-			}
-		}
-
-		return ['files' => $files, 'dirs' => $dirs];
 	}
 
 }

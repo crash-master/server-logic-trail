@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules;
+namespace Modules\Auth;
 
 use Kernel\Module;
 use Kernel\Maker;

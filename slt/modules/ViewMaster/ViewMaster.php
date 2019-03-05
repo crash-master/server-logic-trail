@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules;
+namespace Modules\ViewMaster;
 
 use \Kernel\Module;
 use \Kernel\Services\RecursiveScan;
