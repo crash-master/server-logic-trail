@@ -1,0 +1,2 @@
+[2019-03-06 04:47:11] E_WARNING (code 2) | array_merge(): Argument #2 is not an array IN FILE G:\server\OSPanel\domains\slt.local\slt\modules\Auth\controllers\AuthController.php IN LINE 54
+==================================================================================================

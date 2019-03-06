@@ -6,8 +6,8 @@
  */
 
 return [
-    // 'Com',
-    // 'Auth',
+    'Com',
+    'Auth',
     // 'Sysinfo',
     // 'ViewMaster',
     // 'AjaxHelper',

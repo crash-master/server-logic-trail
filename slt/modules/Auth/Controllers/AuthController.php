@@ -40,16 +40,24 @@ class AuthController extends \Extensions\Controller{
 		if(!module('Auth') -> use_default_pages['signup']){
 			return redirect('/page_not_found');
 		}
-		$title = 'SignUp';
-		return view(module('Auth') -> page_view['signup'], compact('title'));
+		$signin_field = module('Auth') -> signin_field_name;
+		$text = module('Auth') -> default_form_control;
+		$text = array_merge($text, $text['pages_texts']['signup']);
+		unset($texts['pages_texts']);
+		$title = $text['title'];
+		return view(module('Auth') -> page_view['signup'], compact('title', 'signin_field', 'text'));
 	}
 
 	public function signin_page(){
 		if(!module('Auth') -> use_default_pages['signin']){
 			return redirect('/page_not_found');
 		}
-		$title = 'SignIn';
-		return view(module('Auth') -> page_view['signin'], compact('title'));
+		$signin_field = module('Auth') -> signin_field_name;
+		$text = module('Auth') -> default_form_control;
+		$text = array_merge($text, $text['pages_texts']['signin']);
+		unset($texts['pages_texts']);
+		$title = $text['title'];
+		return view(module('Auth') -> page_view['signin'], compact('title', 'signin_field', 'text'));
 	}
 
 	public function signup(){

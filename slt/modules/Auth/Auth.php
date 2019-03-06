@@ -59,6 +59,8 @@ class Auth{
 	 */
 	private $redirect_map = [];
 
+	public $default_form_control = [];
+
 	public $use_default_pages = [
 		'signin' => true,
 		'signup' => true,
@@ -82,6 +84,8 @@ class Auth{
 			$this -> min_password_length = (isset($auth_config['min_password_length']) and $auth_config['min_password_length']) ? $auth_config['min_password_length'] : 6;
 			$this -> role_list = auth_role_list();
 			$this -> err_messages = auth_error_messages();
+			$this -> default_form_control = auth_default_form_control();
+			
 			if(isset($auth_config['use_default_pages']) and is_array($auth_config['use_default_pages'])){
 				foreach ($auth_config['use_default_pages'] as $key => $value) {
 					if(!isset($this -> use_default_pages[$key])){

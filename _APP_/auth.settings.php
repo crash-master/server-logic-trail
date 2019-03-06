@@ -76,8 +76,47 @@ function auth_redirect_map(){
 	auth_redirect(link_to_signup_page, is_signined(), '/');
 }
 
+/**
+ * Setting for defaults pages signin and singup
+ *
+ * @method auth_default_form_control
+ *
+ * @return array Assoc array with settings
+ */
 function auth_default_form_control(){
 	return [
-		
+		/**
+		 * Titles of fields. Will be showing where need input.
+		 */
+		'fields_titles' => [
+			'name' => 'Your name',
+			'surname' => 'Your surname',
+			'email' => 'Your email',
+			'phone' => 'Your phone',
+			'nickname' => 'Your nickname',
+			'sex' => ['male' => 'Male', 'female' => 'Female', 'other' => 'Other'],
+			'age' => 'Your age',
+			'password' => 'Your password',
+			'password_again' => 'Your password again'
+		],
+
+		/**
+		 * Text on pages. Example text on buttons or page title.
+		 */
+		'pages_texts' => [
+			'signin' => [
+				'title' => 'Sign In',
+				'description' => 'Fill in the fields to sign in',
+				'signin_btn' => 'Sign in',
+				'signup_btn' => 'Sign up'
+			],
+
+			'signup' => [
+				'title' => 'Sign Up',
+				'description' => 'Fill in the fields to sign up',
+				'signin_btn' => 'Sign in',
+				'signup_btn' => 'Sign up'
+			]
+		]
 	];
 }
