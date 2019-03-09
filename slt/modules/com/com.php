@@ -11,6 +11,7 @@ class Com{
 	public function __construct(){
 		$this -> startedInit();
 		require_once('com-routes.php');
+		require_once('console.routes.php');
 		require_once('com-components.php');
 	}
 

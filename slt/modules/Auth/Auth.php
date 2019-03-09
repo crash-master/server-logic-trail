@@ -332,4 +332,8 @@ class Auth{
 		return true;
 	}
 
+	public function get_existed_roles(){
+		return $this -> role_list;
+	}
+
 }

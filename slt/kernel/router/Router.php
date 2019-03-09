@@ -4,6 +4,8 @@ namespace Kernel\Router;
 
 use Kernel\Cache;
 use Kernel\Request;
+use Kernel\Events;
+use Kernel\Door;
 
 class Router extends RouterBack implements RouterInterface{
 	public static function init(){
@@ -126,7 +128,7 @@ class Router extends RouterBack implements RouterInterface{
 							'method' => 'post'
 						]);
 
-						$res = Door::knock_to_func($controller, $action, $data);
+						$res = Door::knock_to_class($controller, $action, $data);
 
 						Events::register('worked_action', [
 							'controller' => $controller,

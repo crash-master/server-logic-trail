@@ -11,7 +11,7 @@
 						<p class="card-text">
 							<div class="form-group">
 								<label for="<?= $signin_field ?>"><?= $text['fields_titles'][$signin_field] ?></label>
-								<input type="text" id="<?= $signin_field ?>" name="<?= $signin_field ?>" class="form-control" placeholder="<?= $text['fields_titles']['password'] ?>">
+								<input type="text" id="<?= $signin_field ?>" name="<?= $signin_field ?>" class="form-control" placeholder="<?= $text['fields_titles'][$signin_field] ?>">
 							</div>
 							<div class="form-group">
 								<label for="password"><?= $text['fields_titles']['password'] ?></label>

@@ -6,7 +6,7 @@
  */
 
 return [
-    // 'Com',
+    'Com',
     // 'Auth',
     // 'Sysinfo',
     // 'ViewMaster',
