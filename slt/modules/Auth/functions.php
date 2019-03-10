@@ -13,7 +13,7 @@ function auth_redirect($route, $access, $new_route){
 	}
 
 	if(strpos($route, '@') !== false){
-		$route = linkTo($route);
+		$route = urlto($route);
 	}elseif(strpos($route, 'Controller')){
 		$classname = $route;
 		if(!class_exists($classname)){

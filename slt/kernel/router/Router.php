@@ -52,7 +52,7 @@ class Router extends RouterBack implements RouterInterface{
 		return true;
 	}
 
-	public static function linkTo($action_name, $params = NULL){
+	public static function urlto($action_name, $params = NULL){
 		$data = [];
 		foreach(self::$data as $key => $val){
 			if(!is_object($val))

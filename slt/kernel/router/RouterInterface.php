@@ -93,12 +93,12 @@ interface RouterInterface{
 	/**
 	 * Находит и возвращает маршрут для указанного обработчика
 	 *
-	 * @method linkTo
+	 * @method urlto
 	 *
 	 * @param  string $action_name Обработчик в виде строки, например "IndexController@welcome_page"
 	 * @param  array $params оссоциативный масив параметров со значениями, которые требует обработчик на вход
 	 *
 	 * @return string Маршрут к обработчику, типа "/example/page"
 	 */
-	public static function linkTo($action_name, $params = null);
+	public static function urlto($action_name, $params = null);
 }

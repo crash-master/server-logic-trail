@@ -319,7 +319,7 @@ class Auth{
 	private function redirect_controll(){
 		$auth = $this;
 		\Kernel\Events::on('call_action', function($p) use ($auth){
-			$current_route = linkTo($p['controller'] . '@' . $p['action']);
+			$current_route = urlto($p['controller'] . '@' . $p['action']);
 			auth_redirect_map();
 			if($this -> redirect_map[$current_route][0] === true){
 				redirect($this -> redirect_map[$current_route][1]);

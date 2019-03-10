@@ -59,7 +59,7 @@ class AjaxHelper{
 	}
 
 	public function route_to($controller){
-		return linkTo($controller);
+		return urlto($controller);
 	}
 
 	public function to_controller($arg){

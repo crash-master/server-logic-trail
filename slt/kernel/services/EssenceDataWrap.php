@@ -30,7 +30,7 @@ class EssenceDataWrap extends ArrayLikeObject{
 	}
 
 	public function __call($meth, $params){
-		$_meth = 'edw_'.$meth;
+		$_meth = '_'.$meth;
 		if(method_exists($this -> model, $_meth)){
 			return $this -> model -> $_meth($this, $params);
 		}else{

@@ -136,7 +136,7 @@ class Model extends \Kernel\Services\SingletonPattern{
 		return $this;
 	}
 
-	public function get_data_wrapper($data = []){
+	public function wrap_up($data = []){
 		return new EssenceDataWrap($data, $this);
 	}
 

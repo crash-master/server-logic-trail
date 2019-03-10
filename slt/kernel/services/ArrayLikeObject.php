@@ -41,4 +41,11 @@ class ArrayLikeObject{
 	public function get_fields(){
 		return $this -> fields;
 	}
+
+	public function exists($property_name){
+		if(!isset($this -> arr[$property_name])){
+			return false;
+		}
+		return true;
+	}
 }

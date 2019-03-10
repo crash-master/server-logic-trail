@@ -55,7 +55,7 @@ function dd($var){
 
 function redirect($url, $vars = []){
 	if(strpos($url, '@') !== false){
-		$url = linkTo($url, $vars);
+		$url = urlto($url, $vars);
 	}
 	header('Location: '.$url);
 	die();
@@ -92,8 +92,8 @@ function module($name){
 	return Module::get($name);
 }
 
-function linkTo($controller, $args = false){
-	return Router::linkTo($controller, $args);
+function urlto($controller, $args = false){
+	return Router::urlto($controller, $args);
 }
 
 function vjoin($name, $args = []){

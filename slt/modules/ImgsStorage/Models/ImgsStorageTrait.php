@@ -5,11 +5,11 @@ namespace Modules\ImgsStorage\Models;
 use Kernel\Services\EssenceDataWrap;
 
 trait ImgsStorageTrait{
-	public function edw_remove(EssenceDataWrap $entry){
+	public function _remove(EssenceDataWrap $entry){
 		return $this -> remove_img($entry);
 	}
 
-	public function edw_to_b64(EssenceDataWrap $entry, $size){
+	public function _to_b64(EssenceDataWrap $entry, $size){
 		list($size) = $size;
 		if(array_search($size, array_keys($this -> module -> img_sizes)) === false){
 			throw new \Exception("[ImgsStorage] I don`t no size like {$size}");
@@ -24,7 +24,7 @@ trait ImgsStorageTrait{
 		return $entry -> $size;
 	}
 
-	public function edw_to_link(EssenceDataWrap $entry, $size){
+	public function _to_link(EssenceDataWrap $entry, $size){
 		list($size) = $size;
 		$field = 'link_' . $size;
 		if(array_search($size, array_keys($this -> module -> img_sizes)) === false){

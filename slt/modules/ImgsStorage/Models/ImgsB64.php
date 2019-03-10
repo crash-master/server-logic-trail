@@ -29,7 +29,7 @@ class ImgsB64 extends \Extensions\Model{
 		
 		$this -> resize_img_file($file_img, $img_tmp_name, $this -> size['xl']);
 
-		$img_b64 = $this -> get_data_wrapper();
+		$img_b64 = $this -> wrap_up();
 		$img_b64 -> xl = $this -> b64_from_file($img, $img_tmp_name);
 		$img_b64 -> set();
 
@@ -81,7 +81,7 @@ class ImgsB64 extends \Extensions\Model{
 		$img_out = $this -> module -> path_to_tmp . '__' . basename($tmp_bin_img);
 		$this -> resize_img_file($tmp_bin_img, $img_out, $this -> size[$size]);
 		$b64 = $this -> b64_from_file($img, $img_out);
-		$wrapper = $this -> get_data_wrapper(['id' => $img -> imgsb64_id]);
+		$wrapper = $this -> wrap_up(['id' => $img -> imgsb64_id]);
 		$wrapper -> $size = $b64;
 		$wrapper -> update();
 		return $this -> get_b64_img($img, $size);
@@ -105,6 +105,6 @@ class ImgsB64 extends \Extensions\Model{
 	}
 
 	public function get_link_on_img(EssenceDataWrap $img, $size){
-		return linkTo('\Modules\ImgsStorage\Controllers\ImgsStorageController@binary_image', ['id' => $img -> id, 'size' => $size]);
+		return urlto('\Modules\ImgsStorage\Controllers\ImgsStorageController@binary_image', ['id' => $img -> id, 'size' => $size]);
 	}
 }

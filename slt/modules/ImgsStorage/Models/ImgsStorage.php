@@ -23,7 +23,7 @@ class ImgsStorage extends \Extensions\Model{
 
 	public function set_new_img($file_img, $img_name, $description = ''){
 		$ready_img_data = ['title' => $img_name, 'description' => $description];
-		$img = $this -> get_data_wrapper($ready_img_data);
+		$img = $this -> wrap_up($ready_img_data);
 		$img -> set();
 		$img = ImgsB64::ins() -> set_b64($file_img, $img);
 		return $img;
