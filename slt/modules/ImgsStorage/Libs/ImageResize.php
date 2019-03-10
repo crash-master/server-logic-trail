@@ -50,12 +50,12 @@ class ImageResize{
      *
      * @param string $image_data
      * @return ImageResize
-     * @throws ExceptionHandler
+     * @throws \Exception
      */
     public static function createFromString($image_data)
     {
         if (empty($image_data) || $image_data === null) {
-            throw new ExceptionHandler('image_data must not be empty');
+            throw new \Exception('image_data must not be empty');
         }
         $resize = new self('data://application/octet-stream;base64,' . base64_encode($image_data));
         return $resize;
@@ -92,7 +92,7 @@ class ImageResize{
      *
      * @param string $filename
      * @return ImageResize
-     * @throws ExceptionHandler
+     * @throws \Exception
      */
     public function __construct($filename)
     {
@@ -100,12 +100,12 @@ class ImageResize{
             define('IMAGETYPE_WEBP', 18);
         }
         if ($filename === null || empty($filename) || (substr($filename, 0, 5) !== 'data:' && !is_file($filename))) {
-            throw new ExceptionHandler('File does not exist');
+            throw new \Exception('File does not exist');
         }
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         if (strstr(finfo_file($finfo, $filename), 'image') === false) {
-            throw new ExceptionHandler('Unsupported file type');
+            throw new \Exception('Unsupported file type');
         }
 
         if (!$image_info = getimagesize($filename, $this->source_info)) {
@@ -113,7 +113,7 @@ class ImageResize{
         }
 
         if (!$image_info) {
-            throw new ExceptionHandler('Could not read file');
+            throw new \Exception('Could not read file');
         }
 
         list(
@@ -142,17 +142,17 @@ class ImageResize{
 
         case IMAGETYPE_WEBP:
             if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-                throw new ExceptionHandler('For WebP support PHP >= 5.5.0 is required');
+                throw new \Exception('For WebP support PHP >= 5.5.0 is required');
             }
             $this->source_image = imagecreatefromwebp($filename);
             break;
 
         default:
-            throw new ExceptionHandler('Unsupported image type');
+            throw new \Exception('Unsupported image type');
         }
 
         if (!$this->source_image) {
-            throw new ExceptionHandler('Could not load image');
+            throw new \Exception('Could not load image');
         }
 
         return $this->resize($this->getSourceWidth(), $this->getSourceHeight());
@@ -231,7 +231,7 @@ class ImageResize{
 
         case IMAGETYPE_WEBP:
             if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-                throw new ExceptionHandler('For WebP support PHP >= 5.5.0 is required');
+                throw new \Exception('For WebP support PHP >= 5.5.0 is required');
             }
             $dest_image = imagecreatetruecolor($this->getDestWidth(), $this->getDestHeight());
 
@@ -292,7 +292,7 @@ class ImageResize{
 
         case IMAGETYPE_WEBP:
             if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-                throw new ExceptionHandler('For WebP support PHP >= 5.5.0 is required');
+                throw new \Exception('For WebP support PHP >= 5.5.0 is required');
             }
             if ($quality === null) {
                 $quality = $this->quality_webp;

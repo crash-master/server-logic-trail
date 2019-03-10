@@ -30,7 +30,11 @@ class ImgsStorage extends \Extensions\Model{
 	}
 
 	public function remove_img($img_id){
-		return $this -> remove(['id', '=', $img_id]);
+		$img = $this -> one() -> id($img_id);
+		if($img -> exists('imgsb64_id')){
+			ImgsB64::ins() -> one() -> id($img -> imgsb64_id) -> remove();
+		}
+		return $img -> remove();
 	}
 
 }

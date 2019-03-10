@@ -4,10 +4,10 @@
 
 class /*$modelname*/ extends \Extensions\Model{
 
-    public $table = "/*$tablename*/";
+	public $table = "/*$tablename*/";
 
-    public function default_rows(){
-    	return [];
-    }
+	public function default_rows(){
+		return [];
+	}
 
 }

@@ -38,6 +38,7 @@ class Model extends \Kernel\Services\SingletonPattern{
 		$ret = [];
 		$count = count($exacly_array);
 		for($i=0; $i<$count; $i++){
+			if(!count($exacly_array[$i])) continue;
 			$ret[] = new EssenceDataWrap($exacly_array[$i], $this);
 		}
 

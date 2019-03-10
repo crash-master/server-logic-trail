@@ -72,8 +72,8 @@ function auth_error_messages(){
  * @return [void] 
  */
 function auth_redirect_map(){
-	auth_redirect(link_to_signin_page(), is_signined(), '/'); // read like I want redirect from page '/auth/signin-page' to '/', but only if sign in fulfilled
-	auth_redirect(link_to_signup_page(), is_signined(), '/');
+	auth_redirect(link_to_signin_page, is_signined(), '/'); // read like I want redirect from page '/auth/signin-page' to '/', but only if sign in fulfilled
+	auth_redirect(link_to_signup_page, is_signined(), '/');
 }
 
 /**

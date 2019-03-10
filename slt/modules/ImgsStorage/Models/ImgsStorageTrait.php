@@ -5,7 +5,7 @@ namespace Modules\ImgsStorage\Models;
 use Kernel\Services\EssenceDataWrap;
 
 trait ImgsStorageTrait{
-	public function _remove(EssenceDataWrap $entry){
+	public function _remove_this(EssenceDataWrap $entry){
 		return $this -> remove_img($entry);
 	}
 
@@ -15,7 +15,7 @@ trait ImgsStorageTrait{
 			throw new \Exception("[ImgsStorage] I don`t no size like {$size}");
 		}
 
-		if($entry -> $size){
+		if($entry -> exists($field)){
 			return $entry -> $size;
 		}
 
@@ -31,7 +31,7 @@ trait ImgsStorageTrait{
 			throw new \Exception("[ImgsStorage] I don`t no size like {$size}");
 		}
 
-		if($entry -> $field){
+		if($entry -> exists($field)){
 			return $entry -> $field;
 		}
 

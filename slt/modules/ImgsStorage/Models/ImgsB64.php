@@ -26,7 +26,7 @@ class ImgsB64 extends \Extensions\Model{
 	public function set_b64($file_img, $img){
 		$tmp_title = sha1(rand(100000, 9999999) . $file_img);
 		$img_tmp_name = $this -> module -> path_to_tmp . '__' . $tmp_title;
-		
+
 		$this -> resize_img_file($file_img, $img_tmp_name, $this -> size['xl']);
 
 		$img_b64 = $this -> wrap_up();
