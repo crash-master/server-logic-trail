@@ -12,7 +12,7 @@ use Kernel\{
 	Components,
 	CodeTemplate,
 	Config,
-	Maker
+	Maker\Maker
 };
 
 class ComController extends \Extensions\Controller{

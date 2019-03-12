@@ -2,7 +2,7 @@
 
 namespace Modules\UniOption;
 
-use \Kernel\Maker;
+use \Kernel\Maker\Maker;
 use \Kernel\Module;
 use \Kernel\Events;
 use \Kernel\DBIO;

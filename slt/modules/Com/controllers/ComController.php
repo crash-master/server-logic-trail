@@ -3,7 +3,7 @@
 namespace Modules\Com\Controllers;
 
 use \Kernel\CodeTemplate;
-use \Kernel\Maker;
+use \Kernel\Maker\Maker;
 
 class ComController extends \Extensions\Controller{
 	public function create_controller($with_name){

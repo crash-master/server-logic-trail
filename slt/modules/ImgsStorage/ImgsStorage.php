@@ -3,7 +3,7 @@
 namespace Modules\ImgsStorage;
 
 use Kernel\Module;
-use Kernel\Maker;
+use Kernel\Maker\Maker;
 
 class ImgsStorage{
 	public $path_to_tmp = 'tmp/imgs_storage/';

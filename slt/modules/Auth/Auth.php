@@ -3,7 +3,7 @@
 namespace Modules\Auth;
 
 use Kernel\Module;
-use Kernel\Maker;
+use Kernel\Maker\Maker;
 use Kernel\DBIO;
 use Kernel\CodeTemplate;
 use Kernel\Sess;
