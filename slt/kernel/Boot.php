@@ -15,7 +15,6 @@ class Boot{
 
 	public static function search_and_load($class){
 		$class = strtolower(str_replace('\\', '/', $class));
-		// echo $class . '<br>';
 		$files = self::get_all_files();
 		foreach($files as $file){
 			if(strpos(strtolower($file), $class) !== false){

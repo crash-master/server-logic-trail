@@ -3,6 +3,7 @@ namespace Kernel;
 
 use Kernel\Router\Router;
 use Kernel\Console\Console;
+use Kernel\Cache\Cache;
 
 class SLT{
 

@@ -7,7 +7,7 @@ use Kernel\{
 	Events,
 	ExceptionHandler,
 	Components,
-	Cache
+	Cache\Cache
 };
 
 function ddump($data, $indent=0) {

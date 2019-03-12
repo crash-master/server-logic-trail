@@ -2,7 +2,7 @@
 
 namespace Kernel\Router;
 
-use Kernel\Cache;
+use Kernel\Cache\Cache;
 use Kernel\Request;
 use Kernel\Events;
 use Kernel\Door;
