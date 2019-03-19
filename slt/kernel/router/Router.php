@@ -13,10 +13,9 @@ class Router extends RouterBack implements RouterInterface{
 			return false;
 		}
 		self::$init_flag = true;
-		global $SLT_DEBUG, $SLT_CACHE;
 		self::$cache_flag = false;
-		if($SLT_DEBUG == 'off'){
-			if($SLT_CACHE == 'on'){
+		if(SLT_DEBUG == 'off'){
+			if(SLT_CACHE == 'on'){
 				if(Cache::exists('routes.map')){
 					self::$cache_flag = true;
 					self::set_data_from_cache();

@@ -44,9 +44,8 @@ class Sysinfo{
 	}
 
 	public function last_logic_and_draw_info(){
-		global $SLT_START_POINT_TIME;
 		$report = [];
-		$report['work_time'] = round(microtime(true) - $SLT_START_POINT_TIME, 3);
+		$report['work_time'] = round(microtime(true) - SLT_START_POINT_TIME, 3);
 		$report['total_sql_queries'] = count($this -> sql_queries);
 		$report['sql_queries_list'] = $this -> sql_queries;
 		$report['components_list'] = $this -> components_list;

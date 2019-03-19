@@ -18,8 +18,7 @@ class AjaxHelper{
 	public $response = [];
 
 	public function __construct(){
-		global $SLT_APP_NAME;
-		$ah_settings = $SLT_APP_NAME . '/ajaxhelper.settings.php';
+		$ah_settings = SLT_APP_NAME . '/ajaxhelper.settings.php';
 		$this -> p2m = Module::pathToModule('AjaxHelper');
 
 		if(!file_exists($ah_settings)){
@@ -37,8 +36,7 @@ class AjaxHelper{
 	}
 
 	public function install(){
-		global $SLT_APP_NAME;
-		CodeTemplate::create('ajaxhelper.settings', ['filename' => 'ajaxhelper.settings'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/');
+		CodeTemplate::create('ajaxhelper.settings', ['filename' => 'ajaxhelper.settings'], $this -> p2m . 'codetemplates/', SLT_APP_NAME . '/');
 	}
 
 	public function ajax_helper_controller(){

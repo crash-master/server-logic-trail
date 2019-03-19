@@ -24,22 +24,23 @@ class Model extends \Kernel\Services\SingletonPattern{
 	}
 
 	private function returned_data($data, $one = true, $returning_entity = null){
-		global $SLT_INARR, $SLT_INOBJ;
 		$returning_entity = !is_null($returning_entity) ? $returning_entity : self::$config -> returning;
-		if($returning_entity == $SLT_INARR){
+		if($returning_entity == SLT_INARR){
 			return $data;
 		}
 		if($one or self::$tmp_one_flag){
 			self::$tmp_one_flag = false;
-			return new EssenceDataWrap($data, $this);
+			return new EssenceDataWrap($data[0], $this);
 		}
 
-		$exacly_array = (isset($data[0]) and !empty($data)) ? $data : [$data];
+		// $exacly_array = (isset($data[0]) and !empty($data)) ? $data : [$data];
 		$ret = [];
-		$count = count($exacly_array);
+		// $count = count($exacly_array);
+		$count = count($data);
 		for($i=0; $i<$count; $i++){
-			if(!count($exacly_array[$i])) continue;
-			$ret[] = new EssenceDataWrap($exacly_array[$i], $this);
+			// if(!count($exacly_array[$i])) continue;
+			// $ret[] = new EssenceDataWrap($exacly_array[$i], $this);
+			$ret[] = new EssenceDataWrap($data[$i], $this);
 		}
 
 		return $ret;
@@ -122,7 +123,6 @@ class Model extends \Kernel\Services\SingletonPattern{
 	}
 
 	public function __call($methname, $params){
-		global $SLT_INOBJ;
 		if(is_array($params[0])){
 			$s = 'IN';
 		}else{

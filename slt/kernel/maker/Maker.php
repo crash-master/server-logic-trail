@@ -3,6 +3,7 @@
 namespace Kernel\Maker;
 
 use \Kernel\Services\RecursiveScan;
+use \Kernel\Config;
 
 class Maker extends MakerBack implements MakerInterface{
 	public static function migration_exists($migration_name, $path_to_migration_dir = null){

@@ -9,11 +9,10 @@ use Kernel\Request;
 class AuthController extends \Extensions\Controller{
 
 	public function install(){
-		global $SLT_DEBUG;
-		if($SLT_DEBUG != 'on'){
+		if(SLT_DEBUG != 'on'){
 			return redirect('/');
 		}
-		if(!DBIO::table_exists('Users') or !file_exists($SLT_APP_NAME . '/auth.settings.php')){
+		if(!DBIO::table_exists('Users') or !file_exists(SLT_APP_NAME . '/auth.settings.php')){
 			if(module('Auth') -> install()){
 				return "<h1>Installation was done</h1>";
 			}
@@ -23,8 +22,7 @@ class AuthController extends \Extensions\Controller{
 	}
 
 	public function uninstall(){
-		global $SLT_DEBUG;
-		if($SLT_DEBUG != 'on'){
+		if(SLT_DEBUG != 'on'){
 			return redirect('/');
 		}
 		if(DBIO::table_exists('Users')){

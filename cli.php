@@ -8,7 +8,7 @@
  *
  * @var boolean
  */
-$SLT_CONSOLE_MOD = true;
+define("SLT_CONSOLE_MOD", true);
 
 /**
  * Подключение проекта.

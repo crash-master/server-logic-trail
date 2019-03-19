@@ -19,8 +19,7 @@ class ImgsStorageController extends \Extensions\Controller{
 	}
 
 	public function install(){
-		global $SLT_APP_NAME, $SLT_DEBUG;
-		if($SLT_DEBUG == 'off'){
+		if(SLT_DEBUG == 'off'){
 			return false;
 		}
 		module('ImgsStorage') -> install();
@@ -28,8 +27,7 @@ class ImgsStorageController extends \Extensions\Controller{
 	}
 
 	public function uninstall(){
-		global $SLT_APP_NAME, $SLT_DEBUG;
-		if($SLT_DEBUG == 'off'){
+		if(SLT_DEBUG == 'off'){
 			return false;
 		}
 		module('ImgsStorage') -> uninstall();

@@ -13,8 +13,7 @@ class UniOption extends \Extensions\Model{
 	}
 
 	public function get_all(){
-		global $SLT_INARR;
-		return atarr($this -> all('ASC', $SLT_INARR));
+		return $this -> all('ASC', SLT_INARR);
 	}
 
 	private function isset_in_session_cache($option){
@@ -28,6 +27,7 @@ class UniOption extends \Extensions\Model{
 	}
 
 	private function add_to_session_cache($option, $arr_flag = false){
+		$option = count($option) === 1 ? $option[0] : $option;
 		if(!$arr_flag){
 			if($this -> isset_in_session_cache($option)){
 				return $option;
@@ -57,10 +57,9 @@ class UniOption extends \Extensions\Model{
 	}
 
 	private function get_by_id_or_name($field_name, $field_value){
-		global $SLT_INARR;
 		$option = $this -> get_session_cache($field_name, $field_value);
 		if(!$option){
-			$option = $this -> add_to_session_cache($this -> get([$field_name, '=', $field_value], $SLT_INARR));
+			$option = $this -> add_to_session_cache($this -> get([$field_name, '=', $field_value], SLT_INARR));
 		}
 		return $option;
 	}
@@ -88,10 +87,9 @@ class UniOption extends \Extensions\Model{
 	}
 
 	public function get_by_section_name($section_name){
-		global $SLT_INARR;
 		$options = $this -> get_session_cache('section_name', $section_name);
 		if(!$options or !count($options)){
-			$options = $this -> add_to_session_cache(atarr($this -> get(['section_name', '=', $section_name], $SLT_INARR)), true);
+			$options = $this -> add_to_session_cache($this -> get(['section_name', '=', $section_name], SLT_INARR), true);
 		}
 
 		return is_array($options) ? $options : [];

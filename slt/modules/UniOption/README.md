@@ -1,5 +1,5 @@
 Module for SLT framework
-Version 0.1 beta
+Version 0.2 beta
 This module can manage universal options. Example settings, system options, meta info and ...
 
 Exist function unioption() or u can use model('\Modules\UniOption\Models\UniOption')

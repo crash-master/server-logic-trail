@@ -25,7 +25,30 @@ class UsersMigration extends \Extensions\Migration{
 			-> timestamp('date_of_create');
 		});
 
+		$this -> signup_first_user();
+
 		return true;
+	}
+
+	private function signup_first_user(){
+		on_event('app_finished', function(){
+			$users = \Modules\Auth\Models\Users::ins();
+			if(!$users -> role('superadmin')){
+				$users -> signup([
+					"role" => 'superadmin',
+					"nickname" => 'superadmin',
+					"password" => 'access',
+					"password_again" => 'access',
+					"email" => 'superadmin@example.com',
+					"name" => 'Super',
+					"surname" => 'Admin',
+					"active" => true,
+					"confirmed" => true,
+					"slug" => 'superadmin',
+					"phone" => "+380777777777"
+				]);
+			}
+		});
 	}
 
 	public function down(){

@@ -25,12 +25,11 @@ class Boot{
 	}
 
 	private static function scan_project(){
-		global $SLT_APP_NAME;
 		include_once('slt/kernel/services/Services.php');
 		include_once('slt/kernel/services/RecursiveScan.php');
 		$rs = new RecursiveScan();
 		self::$all_files = $rs -> get_files('./slt');
-		self::$all_files = array_merge(self::$all_files, $rs -> get_files('./' . $SLT_APP_NAME));
+		self::$all_files = array_merge(self::$all_files, $rs -> get_files('./' . SLT_APP_NAME));
 	}
 
 	public static function get_all_files(){

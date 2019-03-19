@@ -2,13 +2,16 @@
 
 namespace Kernel\Cache;
 
+use \Kernel\Services\RecursiveScan;
+use \Kernel\Events;
+
 class Cache extends CacheBack implements CacheInterface{
 	public static function get_path_to_cache_file($name){
 		return self::$cache_directory . '/' . $file_name . '.cache';
 	}
 
 	public static function autoclear_not_relevant_cache(){
-		$rs = new Services\RecursiveScan();
+		$rs = new RecursiveScan();
 		$cache_list = $rs -> get_files(self::$cache_directory);
 		$clear_counter = 0;
 		foreach($cache_list as $cache_file){
@@ -42,15 +45,14 @@ class Cache extends CacheBack implements CacheInterface{
 	}
 
 	public static function code($name, $code_in_func){
-		global $SLT_DEBUG, $SLT_CACHE;
-		if($SLT_DEBUG == 'off' and $SLT_CACHE == 'on'){
+		if(SLT_DEBUG == 'off' and SLT_CACHE == 'on'){
 			if(self::exists($name)){
 				return self::get($name);
 			}
 		}
 
 		$code_result = $code_in_func();
-		if($SLT_CACHE == 'on'){
+		if(SLT_CACHE == 'on'){
 			self::set($name, $code_result);
 		}
 		return $code_result;

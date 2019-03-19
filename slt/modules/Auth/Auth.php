@@ -70,8 +70,7 @@ class Auth{
 	public $page_view = [];
 
 	public function __construct(){
-		global $SLT_APP_NAME;
-		$path_to_settings_file = $SLT_APP_NAME . '/auth.settings.php';
+		$path_to_settings_file = SLT_APP_NAME . '/auth.settings.php';
 		$this -> p2m = Module::pathToModule($this -> module_name);
 		include_once($this -> p2m . 'helpers.php');
 		include_once($this -> p2m . 'functions.php');
@@ -101,7 +100,7 @@ class Auth{
 
 			$this -> redirect_controll();
 
-			$auth_events_file = $SLT_APP_NAME . '/auth.events.map.php';
+			$auth_events_file = SLT_APP_NAME . '/auth.events.map.php';
 			if(file_exists($auth_events_file)){
 				include_once($auth_events_file);
 				auth_events_map();
@@ -119,24 +118,23 @@ class Auth{
 	 * @return [bool] []
 	 */
 	public function install(){
-		global $SLT_APP_NAME, $SLT_DEBUG;
-		if($SLT_DEBUG == 'off'){
+		if(SLT_DEBUG == 'off'){
 			return false;
 		}
 		Maker::migration_up('Users', $this -> p2m . 'migrations/');
-		$settings_file = $SLT_APP_NAME . '/auth.settings.php';
+		$settings_file = SLT_APP_NAME . '/auth.settings.php';
 		if(!file_exists($settings_file)){
-			CodeTemplate::create('auth.settings', ['filename' => 'auth.settings'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/');
+			CodeTemplate::create('auth.settings', ['filename' => 'auth.settings'], $this -> p2m . 'codetemplates/', SLT_APP_NAME . '/');
 		}
 
-		$auth_events_map_file = $SLT_APP_NAME . '/auth.events.map.php';         
+		$auth_events_map_file = SLT_APP_NAME . '/auth.events.map.php';         
 		if(!file_exists($auth_events_map_file)){
-			CodeTemplate::create('auth.events.map', ['filename' => 'auth.events.map'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/');
+			CodeTemplate::create('auth.events.map', ['filename' => 'auth.events.map'], $this -> p2m . 'codetemplates/', SLT_APP_NAME . '/');
 		}
 
-		$Auth_file = $SLT_APP_NAME . '/Auth.php';
+		$Auth_file = SLT_APP_NAME . '/Auth.php';
 		if(!file_exists($Auth_file)){
-			CodeTemplate::create('Auth', ['filename' => 'Auth'], $this -> p2m . 'codetemplates/', $SLT_APP_NAME . '/middleware/modulesevents/');
+			CodeTemplate::create('Auth', ['filename' => 'Auth'], $this -> p2m . 'codetemplates/', SLT_APP_NAME . '/middleware/modulesevents/');
 		}
 
 		return true;
@@ -150,12 +148,11 @@ class Auth{
 	 * @return [bool] []
 	 */
 	public function uninstall(){
-		global $SLT_APP_NAME, $SLT_DEBUG;
-		if($SLT_DEBUG == 'off'){
+		if(SLT_DEBUG == 'off'){
 			return false;
 		}
 		Maker::migration_down('Users', $this -> p2m . 'migrations/');
-		$settings_file = $SLT_APP_NAME . '/auth.settings.php';
+		$settings_file = SLT_APP_NAME . '/auth.settings.php';
 
 		return true;
 	}

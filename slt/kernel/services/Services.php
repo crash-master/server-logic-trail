@@ -71,18 +71,18 @@ function show($data){
 	return true;
 }
 
-function arrayToArray($arr){
-	if(!$arr)
-		return [];
-	elseif(!isset($arr[0]))
-		return [$arr];
-	else
-		return $arr;
-}
+// function arrayToArray($arr){
+// 	if(!$arr)
+// 		return [];
+// 	elseif(!isset($arr[0]))
+// 		return [$arr];
+// 	else
+// 		return $arr;
+// }
 
-function atarr($arr){
-	return arrayToArray($arr);
-}
+// function atarr($arr){
+// 	return arrayToArray($arr);
+// }
 
 function model($name){
 	return call_user_func([$name, 'ins']);

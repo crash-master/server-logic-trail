@@ -246,10 +246,10 @@ class DBIO{
 	
 	public static function fq($sql){
 		$res = Connect::query($sql);
-		if(is_array($res) and !isset($res[1])){
-			if(isset($res[0]))
-				return $res[0];
-		}
+		// if(is_array($res) and !isset($res[1])){
+		// 	if(isset($res[0]))
+		// 		return $res[0];
+		// }
 		return $res;
 	}
 	
