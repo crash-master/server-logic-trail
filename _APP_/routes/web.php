@@ -10,5 +10,3 @@ use Kernel\Router\Router;
 
 route_not_found('IndexController@not_found_page');
 route('/', 'IndexController@welcome_page');
-route('TestController', 'test');
-route('title', 'TestController@test', '/test/add-article');

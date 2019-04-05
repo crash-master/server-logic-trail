@@ -50,7 +50,7 @@ class CodeTemplate{
 	}
 	
 	public static function removePathFromFile($file, $path, $template){
-		$file = str_replace('PATH:', '', $file);
+		$file = str_replace('PATH: ', '', $file);
 		$file = str_replace($path, 'Automatically was generated from a template '. $template, $file);
 		return $file;
 	}

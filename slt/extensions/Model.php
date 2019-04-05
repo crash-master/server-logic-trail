@@ -13,6 +13,13 @@ class Model extends \Kernel\Services\SingletonPattern{
 
 	private static $config;
 	private static $tmp_one_flag = false;
+	/**
+	 * $relations_map массив описывающий как текущая модель должна связывать две других модели
+	 *
+	 * @var array
+	 * @example $relations_map = ['Articles' => 'article_id', 'Comments' => 'comment_id'];
+	 */
+	public $relations_map;
 
 	public function __construct(){
 		self::$config = \Kernel\Config::get() -> system -> model;
@@ -138,7 +145,7 @@ class Model extends \Kernel\Services\SingletonPattern{
 	}
 
 	private function relations_map_data(int $id, string $table){
-		if(!property_exists($this, 'relations_map')){
+		if(!property_exists($this, 'relations_map') and is_array($this -> relations_map)){
 			throw new \Exception("Relations map not found in {$this -> table}");
 		}
 
@@ -153,6 +160,16 @@ class Model extends \Kernel\Services\SingletonPattern{
 		return compact('by_field', 'res_field', 'res_table');
 	}
 
+	/**
+	 * Получить массив id записей привязаных к данной записи
+	 *
+	 * @method relations
+	 *
+	 * @param  int $id идентификатор записи
+	 * @param  string $table название текущей таблицы
+	 *
+	 * @return array Возвращает массив id записей привязаных к той записи чей id был передан
+	 */
 	public function relations(int $id, string $table){
 		extract($this -> relations_map_data($id, $table));
 

@@ -6,13 +6,13 @@
  */
 
 return [
-    'Com',
-    'Auth',
-    'Sysinfo',
-    'ViewMaster',
-    'AjaxHelper',
-    'UniOption',
-    'ImgsStorage',
-    'ConsoleView',
-    'FormHelper'
+    // 'Com',
+    // 'Auth',
+    // 'Sysinfo',
+    // 'ViewMaster',
+    // 'AjaxHelper',
+    // 'UniOption',
+    // 'ImgsStorage',
+    // 'ConsoleView',
+    // 'FormHelper'
 ];
