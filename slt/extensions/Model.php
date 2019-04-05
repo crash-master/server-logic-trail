@@ -33,13 +33,9 @@ class Model extends \Kernel\Services\SingletonPattern{
 			return new EssenceDataWrap($data[0], $this);
 		}
 
-		// $exacly_array = (isset($data[0]) and !empty($data)) ? $data : [$data];
 		$ret = [];
-		// $count = count($exacly_array);
 		$count = count($data);
 		for($i=0; $i<$count; $i++){
-			// if(!count($exacly_array[$i])) continue;
-			// $ret[] = new EssenceDataWrap($exacly_array[$i], $this);
 			$ret[] = new EssenceDataWrap($data[$i], $this);
 		}
 
@@ -139,6 +135,35 @@ class Model extends \Kernel\Services\SingletonPattern{
 
 	public function wrap_up($data = []){
 		return new EssenceDataWrap($data, $this);
+	}
+
+	private function relations_map_data(int $id, string $table){
+		if(!property_exists($this, 'relations_map')){
+			throw new \Exception("Relations map not found in {$this -> table}");
+		}
+
+		$by_field = $this -> relations_map[$table];
+		$tables_list = array_keys($this -> relations_map);
+		list($res_table) = array_keys(array_flip(array_filter($tables_list, function($item) use ($table){
+			return $item != $table;
+		})));
+
+		$res_field = $this -> relations_map[$res_table];
+
+		return compact('by_field', 'res_field', 'res_table');
+	}
+
+	public function relations(int $id, string $table){
+		extract($this -> relations_map_data($id, $table));
+
+		$query_links = $this -> get(['rows' => [$res_field], 'where' => [$by_field, '=', $id]]);
+		$relations_arr = [];
+		foreach ($query_links as $i => $item) {
+			$item = $item -> to_array();
+			$relations_arr[] = $item[$res_field];
+		}
+
+		return $relations_arr;
 	}
 
 }

@@ -4,6 +4,7 @@ namespace Kernel\Maker;
 
 use \Kernel\Services\RecursiveScan;
 use \Kernel\Config;
+use \Kernel\CodeTemplate;
 
 class MakerBack{
 	protected static function get_default_path_to_migration_dir(){
@@ -49,9 +50,25 @@ class MakerBack{
 	protected static function migration_all($migration_method, $path_to_migration_dir = null, $with_models = false){
 		$migrations = self::migrations_list($path_to_migration_dir);
 		foreach($migrations as $migration){
-			self::migration($migration_method, $migration['name'], $path_to_migration_dir, $with_model);
+			self::migration($migration_method, $migration['name'], $path_to_migration_dir, $with_models);
 		}
 
 		return true;
+	}
+
+	protected static function migrations_list($path_to_migration_dir = null){
+		$rs = new RecursiveScan();
+		$path_to_migration_dir = is_null($path_to_migration_dir) ? self::get_default_path_to_migration_dir() : $path_to_migration_dir;
+		$migrations = $rs -> get_files($path_to_migration_dir, false);
+		$ret = [];
+		foreach($migrations as $inx => $migration){
+			if(strpos($migration, 'Migration.php') === false){
+				continue;
+			}
+			list($migration_name) = explode('Migration.php', basename($migration));
+			$ret[] = ['name' => $migration_name, 'path' => $migration];
+		}
+
+		return $ret;
 	}
 }

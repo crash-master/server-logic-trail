@@ -69,8 +69,7 @@ class Essence{
 			}
 		}
 
-		DBW::i() -> table( $this -> tableName ) -> rows($result) -> run();
-		return false;
+		return DBW::i() -> table( $this -> tableName ) -> rows($result) -> run();
 	}
 	
 	public function edit($data, $where = NULL){

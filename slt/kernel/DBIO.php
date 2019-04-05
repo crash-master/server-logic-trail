@@ -54,6 +54,7 @@ class Connect{
 		self::$lastSqlQueryString = $sql;
 		Events::register('ready_sql_query_string', $sql);
 		$result = strpos($sql, 'SELECT') !== false ? self::$connect -> query($sql) -> fetchAll(\PDO::FETCH_ASSOC) : self::$connect -> query($sql);
+		$result = strpos($sql, 'INSERT') !== false ? self::$connect -> lastInsertId() : $result;
 		
 		self::$countQuery++;   
 		Events::register('response_from_db', [

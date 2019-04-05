@@ -30,30 +30,18 @@ class Maker extends MakerBack implements MakerInterface{
 	}
 
 	public static function migration_up_all($path_to_migration_dir = null, $with_models = false){
-		return self::migration_all('up', $path_to_migration_dir, $with_model);
+		return self::migration_all('up', $path_to_migration_dir, $with_models);
 	}
 
 	public static function migration_down_all($path_to_migration_dir = null, $with_models = false){
-		return self::migration_all('down', $path_to_migration_dir, $with_model);
+		return self::migration_all('down', $path_to_migration_dir, $with_models);
 	}
 
 	public static function migration_refresh_all($path_to_migration_dir = null, $with_models = false){
-		return self::migration_down_all($path_to_migration_dir, $with_model) and self::migration_up_all($path_to_migration_dir, $with_model);
+		return self::migration_down_all($path_to_migration_dir, $with_models) and self::migration_up_all($path_to_migration_dir, $with_model);
 	}
 
 	public static function migrations_list($path_to_migration_dir = null){
-		$rs = new RecursiveScan();
-		$path_to_migration_dir = is_null($path_to_migration_dir) ? self::get_default_path_to_migration_dir() : $path_to_migration_dir;
-		$migrations = $rs -> get_files($path_to_migration_dir, false);
-		$ret = [];
-		foreach($migrations as $inx => $migration){
-			if(strpos($migration, 'Migration.php') === false){
-				continue;
-			}
-			list($migration_name) = explode('Migration.php', basename($migration));
-			$ret[] = ['name' => $migration_name, 'path' => $migration];
-		}
-
-		return $ret;
+		parent::migrations_list($path_to_migration_dir);
 	}
 }
