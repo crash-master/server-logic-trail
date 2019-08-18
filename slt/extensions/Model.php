@@ -105,6 +105,7 @@ class Model extends \Kernel\Services\SingletonPattern{
 		if(is_object($data)){
 			$data = $data -> to_array();
 		}
+		
 		$data['date_of_update'] = !isset($data['date_of_update']) ? 'NOW()' : $data['date_of_update'];
 		Events::register('update_table', ['tablename' => $this -> table, 'data' => $data, 'where' => $where]);
 		return (new Essence($this)) -> edit($data, $this -> whereExistAndConvert($where));

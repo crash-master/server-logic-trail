@@ -40,7 +40,8 @@ class Users extends \Extensions\Model{
 			return 3;
 		}
 
-		$this -> set($user);
+		$id = $this -> set($user);
+		$user['id'] = $id;
 		Events::register('auth_signup', ['user' => $user]);
 
 		return false;
@@ -57,7 +58,6 @@ class Users extends \Extensions\Model{
 		}
 
 		if(sha1($user['password']) != $user_card['password']){
-			echo $user_card['password'];
 			return 5;
 		}
 
@@ -72,7 +72,9 @@ class Users extends \Extensions\Model{
 	}
 
 	public function confirm($user_id){
-		return $this -> update(['confirmed' => true], ['id', '=', $user_id]);
+		$user = $this -> one() -> id($user_id);
+		$user -> confirmed = 1;
+		return $user -> update();
 	}
 
 	public function withdraw_confirmation($user_id){
@@ -80,11 +82,15 @@ class Users extends \Extensions\Model{
 	}
 
 	public function activate_account($user_id){
-		return $this -> update(['active' => true], ['id', '=', $user_id]);
+		$user = $this -> one() -> id($user_id);
+		$user -> active = 1;
+		return $user -> update();
 	}
 
 	public function deactivate_account($user_id){
-		return $this -> update(['active' => false], ['id', '=', $user_id]);
+		$user = $this -> one() -> id($user_id);
+		$user -> active = 0;
+		return $user -> update();
 	}
 
 	private function account_data_filter($user_data){
@@ -110,8 +116,13 @@ class Users extends \Extensions\Model{
 	}
 
 	public function change_account_data($user_id, $user_data){
+		$user = $this -> one() -> id($user_id);
 		$user_data = $this -> account_data_filter($user_data);
-		return $this -> update($user_data, ['id', '=', $user_id]);
+		foreach($user_data as $field => $val){
+			$user -> $field = $val;
+		}
+		return $user -> update();
+		// return $this -> update($user_data, ['id', '=', $user_id]);
 	}
 
 	private function role_exists($role){

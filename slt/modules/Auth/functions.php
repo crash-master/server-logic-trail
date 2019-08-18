@@ -33,7 +33,7 @@ function is_user($user_id = false){
 	return auth_is('user', $user_id);
 }
 
-function is_admin(){
+function is_admin($user_id = false){
 	return auth_is('admin', $user_id);
 }
 

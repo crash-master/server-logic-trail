@@ -42,6 +42,6 @@ class Maker extends MakerBack implements MakerInterface{
 	}
 
 	public static function migrations_list($path_to_migration_dir = null){
-		parent::migrations_list($path_to_migration_dir);
+		return parent::migrations_list($path_to_migration_dir);
 	}
 }

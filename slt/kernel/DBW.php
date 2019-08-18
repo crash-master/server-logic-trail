@@ -147,6 +147,9 @@ class DBW{
     
     public static function getCountRows($params){
         $res = DBIO::getCountResults(self::$tablename, $params[self::$tablename]['where']);
+        if(!isset($res['COUNT(*)'])){
+            return $res[0]['COUNT(*)'];
+        }
         return $res['COUNT(*)'];
     }
 }

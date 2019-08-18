@@ -64,7 +64,7 @@ class AuthController extends \Extensions\Controller{
 		$result = module('Auth') -> signup($post);
 		$err = module('Auth') -> get_err_by_errcode($result);
 		if($err){
-			return $err; 
+			return redirect(link_to_signup_page() . '?errn=' . $result);
 		}
 
 		return redirect(link_to_signin_page());
@@ -76,7 +76,7 @@ class AuthController extends \Extensions\Controller{
 		$result = module('Auth') -> signin($post);
 		$err = module('Auth') -> get_err_by_errcode($result);
 		if($err){
-			return $err; 
+			return redirect(link_to_signin_page() . '?errn=' . $result); 
 		}
 
 		return redirect('/');

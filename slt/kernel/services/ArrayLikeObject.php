@@ -8,7 +8,7 @@ class ArrayLikeObject{
 
 	public function __construct($arr){
 		$this -> arr = $arr;
-		$this -> fields = array_keys($arr);
+		$this -> fields = is_array($arr) && count($arr) ? array_keys($arr) : [];
 	}
 
 	public function __get($property){

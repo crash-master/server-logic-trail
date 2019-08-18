@@ -54,6 +54,8 @@ class EssenceDataWrap extends ArrayLikeObject{
 				'limit' => [0, 1]
 			]);
 			$this -> arr['id'] = $last_added -> id;
+		}else{
+			$this -> arr['id'] = $result;
 		}
 
 		return $result;

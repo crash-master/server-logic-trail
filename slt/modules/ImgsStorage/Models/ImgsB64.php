@@ -31,9 +31,9 @@ class ImgsB64 extends \Extensions\Model{
 
 		$img_b64 = $this -> wrap_up();
 		$img_b64 -> xl = $this -> b64_from_file($img, $img_tmp_name);
-		$img_b64 -> set();
+		$img_b64id = $img_b64 -> set();
 
-		$img -> imgsb64_id = $img_b64 -> id;
+		$img -> imgsb64_id = $img_b64id;
 		$img -> type = $this -> get_type($img -> title);
 		$img -> update();
 
